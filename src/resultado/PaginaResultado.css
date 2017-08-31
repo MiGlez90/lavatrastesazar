@@ -1,0 +1,24 @@
+div.paginaResultado{
+    width: 100vw;
+    height: 100vh;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+}
+
+div.result {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+div.result p {
+    margin: 5%;
+    font-weight: bold;
+    font-size: 4rem;
+    color: #000000;
+}
