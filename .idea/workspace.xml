@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aebb030-fc73-4cab-b3b4-2a2f84773c41" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Routes.js" afterPath="$PROJECT_DIR$/src/Routes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/principal/HomePage.js" afterPath="$PROJECT_DIR$/src/principal/HomePage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resultado/PaginaResultado.js" afterPath="$PROJECT_DIR$/src/resultado/PaginaResultado.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -59,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/principal/HomePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+            <state relative-caret-position="289">
+              <caret line="69" column="94" lean-forward="false" selection-start-line="69" selection-start-column="94" selection-end-line="69" selection-end-column="94" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -83,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaginaResultado.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PaginaResultado.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resultado/PaginaResultado.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="253">
@@ -277,12 +274,12 @@
       <workItem from="1504151808350" duration="13640000" />
       <workItem from="1504166092890" duration="1561000" />
       <workItem from="1504283297784" duration="74000" />
-      <workItem from="1504286045190" duration="3771000" />
+      <workItem from="1504286045190" duration="6513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19046000" />
+    <option name="totallyTimeSpent" value="21788000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
@@ -642,16 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/principal/HomePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/resultado/PaginaResultado.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -664,6 +651,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="42" column="18" lean-forward="true" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/principal/HomePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="69" column="94" lean-forward="false" selection-start-line="69" selection-start-column="94" selection-end-line="69" selection-end-column="94" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

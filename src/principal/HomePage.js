@@ -8,7 +8,8 @@ class HomePage extends Component {
         super(props);
         this.state = {
             victima: '',
-            ver: {display:'none'}
+            ver: {display:'none'},
+            verPrincipal: {display: 'initial'}
         };
 
     }
@@ -31,18 +32,27 @@ class HomePage extends Component {
         this.setState({victima:victimaL});
     }
 
+    toggleDisplay = () => {
+        let ver = this.state.ver;
+        ver['display'] = ver['display'] === 'none' ?'initial' : 'none';
+        let verPrincipal = this.state.verPrincipal;
+        verPrincipal['display'] = verPrincipal['display'] === 'none' ? 'initial' : 'none';
+        this.setState({ver:ver,verPrincipal:verPrincipal});
+    }
     mostrarResultado = () => {
         this.determinarQuienLavaraTrastes();
-        let ver = this.state.ver;
-        ver['display'] = 'inherit';
-        this.setState({ver});
+        this.toggleDisplay();
+    }
+
+    regresarPrincipal = () => {
+        this.toggleDisplay();
     }
     render(){
         const imageUrl = require(`../assets/img/wash.jpeg`);
         return(
           <div style={{backgroundImage: `url(${imageUrl})`}} className="principalStyle">
                   <Grid >
-                      <Row>
+                      <Row style={this.state.verPrincipal}>
                           <Col xs={12} md={12}>
                               <Jumbotron style={{background: 'rgba(255,255,255,0.45)'}}>
                                   <h1>Vamos a probar tu suerte!</h1>
@@ -51,15 +61,15 @@ class HomePage extends Component {
 
                               </Jumbotron>
                           </Col>
-                          <Row style={this.state.ver}>
+                      </Row>
+                      <Row style={this.state.ver}>
                               <Col xs={12} md={12}>
                                   <Jumbotron style={{background: 'rgba(255,255,255,0.45)'}}>
                                       <h1 >Felicidades!</h1>
                                       <p >Le toca lavar los platos a {this.state.victima}!</p>
-
+                                      <p><Button bsStyle="primary" onClick={this.toggleDisplay}>Pues ya que!</Button></p>
                                   </Jumbotron>
                               </Col>
-                          </Row>
                       </Row>
                   </Grid>
           </div>
