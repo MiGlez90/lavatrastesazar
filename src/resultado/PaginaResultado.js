@@ -37,17 +37,7 @@ class PaginaResultado extends Component{
         return(
             <div style={{backgroundImage:`url(${imageUrl})`}} className="paginaResultado">
                 <Grid>
-                    <Row>
-                        <Col xs={12} md={12}>
-                            <Jumbotron style={{background: 'rgba(34,17,05,0.5)'}}>
-                                <h1 style={{ color:'white'}}>Felicidades!</h1>
-                                <p style={{ color:'white'}}>Le toca lavar los platos a {this.state.victima}!</p>
-                                <NavLink to="/">
-                                    <p><Button bsStyle="primary" >De acuerdo!</Button></p>
-                                </NavLink>
-                            </Jumbotron>
-                        </Col>
-                    </Row>
+
                 </Grid>
             </div>
                 );
