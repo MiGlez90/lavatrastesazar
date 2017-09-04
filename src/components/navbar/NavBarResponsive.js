@@ -2,24 +2,38 @@ import React, {Component} from 'react';
 import Routes from '../../Routes';
 import {NavLink} from 'react-router-dom';
 import {Navbar,NavItem,Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 
 class NavBarResponsive extends Component {
 	render(){
 		const style = {
-			borderRadius: '0px'
+			borderRadius: '0px',
+			marginBottom: '0px'
 		};
 		return (
 			<Navbar style={style} inverse collapseOnSelect>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a href="#">AMARE</a>
+						<NavLink to='/'>
+							AMARE
+							<FontAwesome
+								name='heart'
+								size='1x'
+								style={{ margin:'1px 3px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+							/>
+						</NavLink>
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav>
-						<NavItem eventKey={1} href="#">Coin Toss App</NavItem>
-						<NavItem eventKey={2} href="#">Control Diabetes</NavItem>
+
+						<NavItem >
+							<NavLink to='/lavatrastesazar'>Coin Toss App</NavLink>
+						</NavItem>
+
+
+						<NavItem eventKey={2} >Control Diabetes</NavItem>
 						{/*
 						<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Action</MenuItem>
@@ -29,10 +43,10 @@ class NavBarResponsive extends Component {
 							<MenuItem eventKey={3.3}>Separated link</MenuItem>
 						</NavDropdown>*/}
 					</Nav>
-					{/*<Nav pullRight>
-						<NavItem eventKey={1} href="#">Link Right</NavItem>
-						<NavItem eventKey={2} href="#">Link Right</NavItem>
-					</Nav>*/}
+					<Nav pullRight>
+						<NavItem eventKey={1} href="#">Entrar</NavItem>
+						<NavItem eventKey={2} href="#">Registrarse</NavItem>
+					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
 		);
