@@ -1,9 +1,10 @@
 div.homePage {
-	background-image: url('../../assets/img/wallpaper-earth-hd-24.jpg');
+	background-image: url('../../assets/img/family.jpeg');
+	min-height: 100%;
 	background-size: cover;
 	width: 100vw;
-	height: 90vh;
-	opacity: 0.99;
+	height: 100vh;
+	opacity: 0.90;
 }
 
 NavLink{

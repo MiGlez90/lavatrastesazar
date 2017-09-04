@@ -46,13 +46,16 @@ class HomePage extends Component {
 
 
     render(){
-        const imageUrl = require(`../../assets/img/azarFondo.jpeg`);
+        const jumbotron = {
+        	background: 'rgba(47,79,79,0.50)',
+	        color: 'white'
+        };
         return(
-          <div style={{backgroundImage: `url(${imageUrl})`}} className="principalStyle">
+          <div className="principalStyle">
                   <Grid >
                       <Row style={this.state.verPrincipal}>
                           <Col xs={12} md={12}>
-                              <Jumbotron style={{background: 'rgba(255,255,255,0.45)'}}>
+                              <Jumbotron style={jumbotron}>
                                   <h1>Vamos a probar tu suerte!</h1>
                                   <p>Oprime el botón y veamos quién lavará los trastes!!</p>
                                   <p><Button bsStyle="primary" onClick={this.mostrarResultado}>Oprímeme!</Button></p>
@@ -62,7 +65,7 @@ class HomePage extends Component {
                       </Row>
                       <Row style={this.state.ver}>
                               <Col xs={12} md={12}>
-                                  <Jumbotron style={{background: 'rgba(255,255,255,0.45)'}}>
+                                  <Jumbotron style={jumbotron}>
                                       <h1 >Felicidades!</h1>
                                       <p >Le toca lavar los platos a {this.state.victima}!</p>
                                       <p><Button bsStyle="primary" onClick={this.toggleDisplay}>Pues ya que!</Button></p>

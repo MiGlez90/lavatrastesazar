@@ -11,15 +11,15 @@ class NavBarResponsive extends Component {
 			marginBottom: '0px'
 		};
 		return (
-			<Navbar style={style} inverse collapseOnSelect>
+			<Navbar style={style} inverse collapseOnSelect fixedTop>
 				<Navbar.Header>
 					<Navbar.Brand>
 						<NavLink to='/'>
 							AMARE
 							<FontAwesome
 								name='heart'
-								size='1x'
-								style={{ margin:'1px 3px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+								size='lg'
+								style={{ margin:'1px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
 							/>
 						</NavLink>
 					</Navbar.Brand>
