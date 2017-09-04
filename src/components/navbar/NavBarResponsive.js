@@ -33,7 +33,9 @@ class NavBarResponsive extends Component {
 						</NavItem>
 
 
-						<NavItem eventKey={2} >Control Diabetes</NavItem>
+						<NavItem>
+							<NavLink to='/diabetes'>Control Diabetes</NavLink>
+						</NavItem>
 						{/*
 						<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Action</MenuItem>
