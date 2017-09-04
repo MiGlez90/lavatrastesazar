@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import HomePage from './components/principal/HomePage';
+import HomePage from './components/principalLavarTrastesApp/HomePageLavarTrastesApp';
 
 const Routes = () => (
 

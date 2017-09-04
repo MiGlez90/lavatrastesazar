@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Grid, Row, Col, Jumbotron, Button } from 'react-bootstrap';
 
-import './HomePage.css'
+import './HomePageLavarTrastesApp.css'
 
 class HomePage extends Component {
     constructor(props){
