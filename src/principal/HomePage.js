@@ -16,8 +16,8 @@ class HomePage extends Component {
 
 
     determinarQuienLavaraTrastes = () => {
-        var coinToss = Math.floor(Math.random() * 2);
-        var victimaL = '';
+        let coinToss = Math.floor(Math.random() * 2);
+        let victimaL = '';
         switch (coinToss){
             case 0:
                 victimaL = 'Miguel';
@@ -30,7 +30,7 @@ class HomePage extends Component {
                 break;
         }
         this.setState({victima:victimaL});
-    }
+    };
 
     toggleDisplay = () => {
         let ver = this.state.ver;
@@ -38,15 +38,13 @@ class HomePage extends Component {
         let verPrincipal = this.state.verPrincipal;
         verPrincipal['display'] = verPrincipal['display'] === 'none' ? 'initial' : 'none';
         this.setState({ver:ver,verPrincipal:verPrincipal});
-    }
+    };
     mostrarResultado = () => {
         this.determinarQuienLavaraTrastes();
         this.toggleDisplay();
-    }
+    };
 
-    regresarPrincipal = () => {
-        this.toggleDisplay();
-    }
+
     render(){
         const imageUrl = require(`../assets/img/wash.jpeg`);
         return(
