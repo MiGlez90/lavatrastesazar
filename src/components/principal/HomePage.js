@@ -46,7 +46,7 @@ class HomePage extends Component {
 
 
     render(){
-        const imageUrl = require(`../assets/img/wash.jpeg`);
+        const imageUrl = require(`../../assets/img/wash.jpeg`);
         return(
           <div style={{backgroundImage: `url(${imageUrl})`}} className="principalStyle">
                   <Grid >
