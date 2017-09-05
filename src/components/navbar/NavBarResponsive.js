@@ -17,6 +17,7 @@ class NavBarResponsive extends Component {
 						<NavLink to='/'>
 							AMARE
 							<FontAwesome
+								color='red'
 								name='heart'
 								size='lg'
 								style={{ margin:'1px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
@@ -29,7 +30,7 @@ class NavBarResponsive extends Component {
 					<Nav>
 
 						<NavItem >
-							<NavLink to='/lavatrastesazar'>Coin Toss App</NavLink>
+							<NavLink style={{color:'inherited'}} to='/lavatrastesazar'>Coin Toss App</NavLink>
 						</NavItem>
 
 

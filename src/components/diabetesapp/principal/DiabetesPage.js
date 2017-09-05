@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Grid, Col } from 'react-bootstrap';
+import firebase from '../../../firebase';
 
 
 class diabetesPage extends  Component
@@ -9,6 +10,21 @@ class diabetesPage extends  Component
 		this.state = {
 			user: ''
 		};
+		firebase.auth().onAuthStateChanged( (user) => {
+			if (user) {
+				console.log(user.uid);
+				var usuario = user.uid;
+				this.setState({user:usuario});
+				this.recuperarGastos();
+			} else {
+				// No user is signed in.
+				//toastr.error('No ha iniciado sesión');
+				alert('No ha iniciado sesión');
+				this.props.history.push("/");
+			}
+		});
+
+
 	}
 	render()
 	{
