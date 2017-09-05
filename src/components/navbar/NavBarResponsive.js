@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import Routes from '../../Routes';
 import {NavLink} from 'react-router-dom';
-import {Navbar,NavItem,Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar,NavItem,Nav} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import './NavBarResponsive.css';
 
 class NavBarResponsive extends Component {
 	render(){
@@ -14,14 +15,14 @@ class NavBarResponsive extends Component {
 			<Navbar style={style} inverse collapseOnSelect fixedTop>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<NavLink to='/'>
+						<NavLink  to='/' >
 							AMARE
-							<FontAwesome
+							{/*<FontAwesome
 								color='red'
 								name='heart'
 								size='lg'
 								style={{ margin:'1px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-							/>
+							/>*/}
 						</NavLink>
 					</Navbar.Brand>
 					<Navbar.Toggle />
@@ -30,12 +31,12 @@ class NavBarResponsive extends Component {
 					<Nav>
 
 						<NavItem >
-							<NavLink style={{color:'inherited'}} to='/lavatrastesazar'>Coin Toss App</NavLink>
+							<NavLink className='noDecoration' to='/lavatrastesazar'>Coin Toss App</NavLink>
 						</NavItem>
 
 
 						<NavItem>
-							<NavLink to='/diabetes'>Control Diabetes</NavLink>
+							<NavLink className='noDecoration' to='/diabetes'>Control Diabetes</NavLink>
 						</NavItem>
 						{/*
 						<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -47,7 +48,11 @@ class NavBarResponsive extends Component {
 						</NavDropdown>*/}
 					</Nav>
 					<Nav pullRight>
-						<NavItem eventKey={1} href="#">Entrar</NavItem>
+						<NavItem eventKey={1} >
+							<NavLink className='noDecoration' to="/login">
+								Entrar
+							</NavLink>
+						</NavItem>
 						<NavItem eventKey={2} href="#">Registrarse</NavItem>
 					</Nav>
 				</Navbar.Collapse>

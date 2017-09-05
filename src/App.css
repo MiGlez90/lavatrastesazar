@@ -18,6 +18,17 @@
   font-size: large;
 }
 
+.App-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background-image: url('./assets/img/family.jpeg');
+  min-height: 100%;
+  background-size: cover;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

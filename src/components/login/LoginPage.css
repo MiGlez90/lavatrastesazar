@@ -1,0 +1,7 @@
+.form-login{
+	border: 1px solid darkgray;
+	background: rgba(255,255,255,0.5);
+	padding: 3rem;
+	border-radius: 3%;
+	/*text-align: left;*/
+}

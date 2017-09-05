@@ -1,0 +1,9 @@
+.noDecoration,
+.noDecoration:hover,
+.noDecoration:visited,
+.noDecoration:active{
+	text-decoration: none;
+	color: #9D9D9D;
+}
+
+
