@@ -13,12 +13,18 @@ from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import '../../App.css';
 import './LoginPage.css';
+import {NavLink} from 'react-router-dom';
 
 class LoginPage extends Component {
 	render() {
 		return (
 			<div className="App-flex">
 				<Form horizontal className="form-login">
+					<FormGroup>
+						<Col componentClass={ControlLabel}>
+							Iniciar con
+						</Col>
+					</FormGroup>
 					<FormGroup>
 						<FontAwesome
 							name="facebook"
@@ -38,7 +44,11 @@ class LoginPage extends Component {
 							style={{ margin:'8px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
 						/>
 					</FormGroup>
-
+					<FormGroup>
+						<Col componentClass={ControlLabel}>
+							o
+						</Col>
+					</FormGroup>
 
 					<FormGroup controlId="formHorizontalEmail">
 						<Col componentClass={ControlLabel} sm={12} md={12} style={{textAlign:"left"}}>
@@ -58,7 +68,7 @@ class LoginPage extends Component {
 						</Col>
 					</FormGroup>
 
-					<FormGroup>
+					{/*<FormGroup>
 						<Col
 							sm={12}
 							md={12}
@@ -66,14 +76,23 @@ class LoginPage extends Component {
 						>
 							<Checkbox>Remember me</Checkbox>
 						</Col>
-					</FormGroup>
+					</FormGroup>*/}
 
 					<FormGroup>
 						<Col sm={12} md={12}>
-							<Button type="submit">
-								Sign in
+							<Button bsStyle="primary" type="submit">
+								Entrar
 							</Button>
 						</Col>
+					</FormGroup>
+
+					<FormGroup>
+						<Col componentClass={ControlLabel}>
+							¿Aún no tienes cuenta?
+						</Col>
+						<NavLink to='/'>
+							Registrate
+						</NavLink>
 					</FormGroup>
 				</Form>
 			</div>

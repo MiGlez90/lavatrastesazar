@@ -5,3 +5,14 @@
 	border-radius: 3%;
 	/*text-align: left;*/
 }
+
+.btn-login{
+	color: white;
+	background: #333333;
+	border-color: #333333;
+}
+
+.btn-login:hover{
+	background: #2F2F2F;
+	border-color: #2F2F2F;
+}
