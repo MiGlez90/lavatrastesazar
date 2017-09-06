@@ -8,7 +8,8 @@ class NavBarResponsive extends Component {
 	render(){
 		const style = {
 			borderRadius: '0px',
-			marginBottom: '0px'
+			marginBottom: '0px',
+			//background: 'rgba(0,0,0,0)'
 		};
 		return (
 			<Navbar style={style} inverse collapseOnSelect fixedTop>
