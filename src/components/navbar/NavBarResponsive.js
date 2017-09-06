@@ -53,7 +53,11 @@ class NavBarResponsive extends Component {
 								Entrar
 							</NavLink>
 						</NavItem>
-						<NavItem eventKey={2} href="#">Registrarse</NavItem>
+						<NavItem eventKey={2} >
+							<NavLink className='noDecoration' to="/signup">
+								Entrar
+							</NavLink>
+						</NavItem>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

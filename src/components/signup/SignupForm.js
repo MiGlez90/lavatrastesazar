@@ -8,22 +8,16 @@ import {
 	FormControl,
 	ControlLabel,
 }
-from 'react-bootstrap';
+	from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
-class LoginForm extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-
-		};
-	}
+class SignupForm extends Component {
 	render() {
 		return (
-			<Form horizontal className="form-login">
+			<Form horizontal className="form-signup">
 				<FormGroup>
 					<Col componentClass={ControlLabel}>
-						Iniciar con
+						Registrarse
 					</Col>
 				</FormGroup>
 				<FormGroup>
@@ -91,7 +85,7 @@ class LoginForm extends Component {
 					<Col componentClass={ControlLabel}>
 						¿Aún no tienes cuenta?
 					</Col>
-					<NavLink to='/signup'>
+					<NavLink to='/'>
 						Registrate
 					</NavLink>
 				</FormGroup>
@@ -100,4 +94,4 @@ class LoginForm extends Component {
 	}
 }
 
-export default LoginForm;
+export default SignupForm;
