@@ -1,9 +1,25 @@
+
 .form-login{
 	border: 1px solid darkgray;
 	background: rgba(255,255,255,0.5);
 	padding: 3rem;
 	border-radius: 3%;
+	width: 40vw;
 	/*text-align: left;*/
+}
+@media screen and (min-width: 481px) {
+	.form-login{
+		width: 30vw;
+		/*text-align: left;*/
+	}
+}
+
+@media screen and (max-width: 480px){
+	.form-login{
+		width: 95vw;
+
+		/*text-align: left;*/
+	}
 }
 
 .btn-login{

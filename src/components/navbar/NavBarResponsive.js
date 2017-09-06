@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import Routes from '../../Routes';
+//import Routes from '../../Routes';
 import {NavLink} from 'react-router-dom';
 import {Navbar,NavItem,Nav} from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
 import './NavBarResponsive.css';
 
 class NavBarResponsive extends Component {
