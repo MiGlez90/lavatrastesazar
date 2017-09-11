@@ -5,10 +5,10 @@ import {
 	FormGroup,
 	Col,
 	Button,
-	FormControl,
 	ControlLabel,
 }
 from 'react-bootstrap';
+import InputBootstrap from "../common/InputBootstrap";
 //import FontAwesome from 'react-fontawesome';
 
 class LoginForm extends Component {
@@ -18,6 +18,9 @@ class LoginForm extends Component {
 			usuario:{
 				email: '',
 				password: '',
+			},
+			bandera:{
+				longitudPass: true
 			}
 		};
 	}
@@ -28,10 +31,45 @@ class LoginForm extends Component {
 		this.setState({usuario});
 	}
 
+	handleInPassword = (e) => {
+		this.handleChange(e);
+		let bandera = this.state.bandera;
+
+		if ( e.target.value.length > 6 ){
+			bandera.longitudPass = true;
+		}else{
+			bandera.longitudPass = false;
+		}
+		this.setState({bandera});
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.loginWithPassword(this.state.usuario);
 	}
+
+	getValidationState  ( cSuccess, cWarning, cError )  {
+
+		if (cSuccess) {
+			return 'success';
+		}
+		else if (cWarning) {
+			return  'warning';
+		}
+		else if (cError) {
+			return  'error';
+		}
+	}
+
+	validarLengthPass  ()  {
+		const length = this.state.usuario.password.length;
+		const cSuccess = length > 6;
+		const cWarning = length > 3;
+		const cError = length > 0;
+		let bandera = this.getValidationState(cSuccess,cWarning,cError);
+		return bandera;
+	}
+
 
 	render() {
 		return (
@@ -40,101 +78,35 @@ class LoginForm extends Component {
 				className="form-login"
 				onSubmit={this.handleSubmit}
 			>
-				{/*
-				<FormGroup>
-					<Col componentClass={ControlLabel}>
-						Iniciar con
-					</Col>
-				</FormGroup>
+				<InputBootstrap
+					label="Email"
+					input={{
+						required:"required",
+						onChange:this.handleChange,
+						name:"email",
+						type:"email",
+						placeholder:"Email",
+						min:"6"
+					}}
 
-				<FormGroup>
-					<FontAwesome
-						name="facebook"
-						size="2x"
-						style={{ margin:'8px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-						onClick={this.props.loginWithFacebook}
-					/>
+				/>
 
-					<FontAwesome
-						name="twitter"
-						size="2x"
-						style={{ margin:'8px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-						onClick={this.props.loginWithTwitter}
-					/>
+				<InputBootstrap
+					validationState={this.validarLengthPass()}
+					label="Contraseña"
+					bandera={this.state.bandera.longitudPass}
+					mensaje="La cadena debe ser mayor de 6 caracteres"
+					validar={true}
+					input={{
+						required:"required",
+						onChange: this.handleInPassword,
+						name:"password",
+						type:"password",
+						placeholder:"Contraseña",
 
-					<FontAwesome
-						name="google"
-						size="2x"
-						style={{ margin:'8px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-						onClick={this.props.loginWithGoogle}
-					/>
-				</FormGroup>
+					}}
 
-				<FormGroup>
-					<Col componentClass={ControlLabel}>
-						o
-					</Col>
-				</FormGroup>
-				*/}
-				<FormGroup
-					controlId="formHorizontalEmail"
-				>
-					<Col
-						componentClass={ControlLabel}
-						sm={12}
-						md={12}
-						style={{textAlign:"left"}}
-					>
-						Email
-					</Col>
-					<Col
-						sm={12}
-						md={12}
-					>
-						<FormControl
-							required="required"
-							onChange={this.handleChange}
-							type="email"
-							placeholder="Email"
-							name="email"
-						/>
-					</Col>
-				</FormGroup>
-
-				<FormGroup
-					controlId="formHorizontalPassword"
-				>
-					<Col
-						componentClass={ControlLabel}
-						sm={12}
-						md={12}
-						style={{textAlign:"left"}}
-					>
-						Contraseña
-					</Col>
-					<Col
-						sm={12}
-						md={12}
-					>
-						<FormControl
-							required="required"
-							type="password"
-							placeholder="Password"
-							name="password"
-							onChange={this.handleChange}
-						/>
-					</Col>
-				</FormGroup>
-
-				{/*<FormGroup>
-						<Col
-							sm={12}
-							md={12}
-
-						>
-							<Checkbox>Remember me</Checkbox>
-						</Col>
-					</FormGroup>*/}
+				/>
 
 				<FormGroup>
 					<Col

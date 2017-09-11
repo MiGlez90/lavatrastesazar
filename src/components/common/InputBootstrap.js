@@ -36,7 +36,8 @@ class InputBootstrap extends Component {
 				<HelpBlock
 					style={{
 						textAlign:'left',
-						paddingLeft:15
+						paddingLeft:15,
+						margin: " 5px 0px 0px 0px"
 					}}
 				>
 					{
