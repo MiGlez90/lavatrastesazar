@@ -9,17 +9,20 @@ import {
 	ControlLabel,
 }
 	from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
+//import FontAwesome from 'react-fontawesome';
+
 
 class SignupForm extends Component {
 	render() {
 		return (
 			<Form horizontal className="form-signup">
+				{/*
 				<FormGroup>
 					<Col componentClass={ControlLabel}>
 						Registrarse
 					</Col>
 				</FormGroup>
+
 				<FormGroup>
 					<FontAwesome
 						name="facebook"
@@ -42,6 +45,24 @@ class SignupForm extends Component {
 				<FormGroup>
 					<Col componentClass={ControlLabel}>
 						o
+					</Col>
+				</FormGroup>
+				*/}
+				<FormGroup controlId="formHorizontalEmail">
+					<Col componentClass={ControlLabel} sm={12} md={12} style={{textAlign:"left"}}>
+						Nombre
+					</Col>
+					<Col sm={12} md={12}>
+						<FormControl name="nombre" type="text" placeholder="Nombre" />
+					</Col>
+				</FormGroup>
+
+				<FormGroup controlId="formHorizontalEmail">
+					<Col componentClass={ControlLabel} sm={12} md={12} style={{textAlign:"left"}}>
+						Nombre
+					</Col>
+					<Col sm={12} md={12}>
+						<FormControl type="email" placeholder="Email" />
 					</Col>
 				</FormGroup>
 
