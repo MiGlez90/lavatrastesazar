@@ -25,7 +25,7 @@ class SignupForm extends Component {
 				longitudPass: true,
 				coincidePass: true
 			},
-			matchPassword: ''
+			matchPassword: 'EOF'
 
 		}
 	}
@@ -43,6 +43,13 @@ class SignupForm extends Component {
 			bandera.longitudPass = true;
 		}else{
 			bandera.longitudPass = false;
+		}
+
+
+		if ( this.state.matchPassword === this.state.usuario.password ){
+			bandera.coincidePass = true;
+		}else{
+			bandera.coincidePass = false;
 		}
 		this.setState({bandera});
 	}
@@ -94,8 +101,9 @@ class SignupForm extends Component {
 
 	validarMatchPass ( ) {
 		const coincide = this.state.matchPassword;
-		const cSuccess = coincide === this.state.usuario.password;
-		const cWarning = false;
+		if ( coincide === 'EOF') return;
+		const cSuccess = coincide === this.state.usuario.password && coincide !== '';
+		const cWarning = coincide === '';
 		const cError = coincide !== this.state.usuario.password;
 		let bandera = this.getValidationState(cSuccess,cWarning,cError);
 		return bandera;
