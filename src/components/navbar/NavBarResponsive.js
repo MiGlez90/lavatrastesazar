@@ -19,17 +19,12 @@ class NavBarResponsive extends Component {
 				fixedTop
 			>
 				<Navbar.Header>
-					<Navbar.Brand >
-
+					<LinkContainer to="/">
+						<Navbar.Brand >
 							AMARE
-							{/*<FontAwesome
-								color='red'
-								name='heart'
-								size='lg'
-								style={{ margin:'1px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-							/>*/}
+						</Navbar.Brand>
+					</LinkContainer>
 
-					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
