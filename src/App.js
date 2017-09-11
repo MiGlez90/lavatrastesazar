@@ -5,14 +5,15 @@ import './App.css';
 
 
 class App extends Component {
-  render() {
-    return (
+
+	render() {
+        return (
 	        <div className="App">
 		        <NavBarResponsive/>
 		        <Routes/>
 	        </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;

@@ -39,7 +39,7 @@ class LoginPage extends Component {
 					//this.props.history.push('/perfil');
 				})
 				.catch( (error) => {
-					var errorCode = error.code;
+					//var errorCode = error.code;
 					var errorMessage = error.message;
 					console.log('Algo estuvo mal ' + errorMessage);
 					//toastr.error("Something wrong" + errorMessage);

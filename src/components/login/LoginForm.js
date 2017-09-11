@@ -76,12 +76,23 @@ class LoginForm extends Component {
 					</Col>
 				</FormGroup>
 				*/}
-				<FormGroup controlId="formHorizontalEmail">
-					<Col componentClass={ControlLabel} sm={12} md={12} style={{textAlign:"left"}}>
+				<FormGroup
+					controlId="formHorizontalEmail"
+				>
+					<Col
+						componentClass={ControlLabel}
+						sm={12}
+						md={12}
+						style={{textAlign:"left"}}
+					>
 						Email
 					</Col>
-					<Col sm={12} md={12}>
+					<Col
+						sm={12}
+						md={12}
+					>
 						<FormControl
+							required="required"
 							onChange={this.handleChange}
 							type="email"
 							placeholder="Email"
@@ -90,12 +101,23 @@ class LoginForm extends Component {
 					</Col>
 				</FormGroup>
 
-				<FormGroup controlId="formHorizontalPassword">
-					<Col componentClass={ControlLabel} sm={12} md={12} style={{textAlign:"left"}}>
+				<FormGroup
+					controlId="formHorizontalPassword"
+				>
+					<Col
+						componentClass={ControlLabel}
+						sm={12}
+						md={12}
+						style={{textAlign:"left"}}
+					>
 						Contraseña
 					</Col>
-					<Col sm={12} md={12}>
+					<Col
+						sm={12}
+						md={12}
+					>
 						<FormControl
+							required="required"
 							type="password"
 							placeholder="Password"
 							name="password"
@@ -115,15 +137,23 @@ class LoginForm extends Component {
 					</FormGroup>*/}
 
 				<FormGroup>
-					<Col sm={12} md={12}>
-						<Button bsStyle="primary" type="submit">
+					<Col
+						sm={12}
+						md={12}
+					>
+						<Button
+							bsStyle="primary"
+							type="submit"
+						>
 							Entrar
 						</Button>
 					</Col>
 				</FormGroup>
 
 				<FormGroup>
-					<Col componentClass={ControlLabel}>
+					<Col
+						componentClass={ControlLabel}
+					>
 						¿Aún no tienes cuenta?
 					</Col>
 					<NavLink to='/signup'>

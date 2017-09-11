@@ -5,6 +5,7 @@ import './SignupPage.css';
 
 
 class SignupPage extends Component {
+
 	signinWithPassword = (user) => {
 		firebase.auth()
 			.createUserWithEmailAndPassword(user.email, user.password)
