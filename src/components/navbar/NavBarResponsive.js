@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-//import Routes from '../../Routes';
-import {NavLink} from 'react-router-dom';
 import {Navbar,NavItem,Nav} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import './NavBarResponsive.css';
 
 class NavBarResponsive extends Component {
+
 	render(){
 		const style = {
 			borderRadius: '0px',
@@ -12,10 +12,15 @@ class NavBarResponsive extends Component {
 			//background: 'rgba(0,0,0,0)'
 		};
 		return (
-			<Navbar style={style} inverse collapseOnSelect fixedTop>
+			<Navbar
+				style={style}
+				inverse
+				collapseOnSelect
+				fixedTop
+			>
 				<Navbar.Header>
-					<Navbar.Brand>
-						<NavLink  to='/' >
+					<Navbar.Brand >
+
 							AMARE
 							{/*<FontAwesome
 								color='red'
@@ -23,21 +28,24 @@ class NavBarResponsive extends Component {
 								size='lg'
 								style={{ margin:'1px 8px', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
 							/>*/}
-						</NavLink>
+
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav>
+						<LinkContainer to="/lavatrastesazar">
+							<NavItem eventKey="lavatrastes" >
+								Coin Toss App
+							</NavItem>
+						</LinkContainer>
 
-						<NavItem >
-							<NavLink className='noDecoration' to='/lavatrastesazar'>Coin Toss App</NavLink>
-						</NavItem>
+						<LinkContainer to="/diabetes">
+							<NavItem eventKey="diabetes">
+								Control Diabetes
+							</NavItem>
+						</LinkContainer>
 
-
-						<NavItem>
-							<NavLink className='noDecoration' to='/diabetes'>Control Diabetes</NavLink>
-						</NavItem>
 						{/*
 						<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
 							<MenuItem eventKey={3.1}>Action</MenuItem>
@@ -48,16 +56,18 @@ class NavBarResponsive extends Component {
 						</NavDropdown>*/}
 					</Nav>
 					<Nav pullRight>
-						<NavItem eventKey={1} >
-							<NavLink className='noDecoration' to="/login">
+						<LinkContainer to="/login">
+							<NavItem eventKey="login" >
 								Entrar
-							</NavLink>
-						</NavItem>
-						<NavItem eventKey={2} >
-							<NavLink className='noDecoration' to="/signup">
-								Entrar
-							</NavLink>
-						</NavItem>
+							</NavItem>
+						</LinkContainer>
+						<LinkContainer to="/signup">
+							<NavItem eventKey="signup" >
+								Sign up
+							</NavItem>
+						</LinkContainer>
+
+
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
