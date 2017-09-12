@@ -15,22 +15,28 @@ class diabetesPage extends  Component
 {
 	constructor(props){
 		super(props);
+		const fechaActual = new Date();
+		const ffecha = fechaActual.getMonth() + 'de' +fechaActual.getFullYear();
+		console.log('ffecha'+ffecha);
 		this.state = {
-			user: '',
+			userId: '',
 			showAddNew: false,
 			isBlocking:false,
 			medida:{
 				medida: 0,
 				descripcion: '',
 				fecha: ''
-			}
+			},
+			dateRama: ffecha,
+			medidasLista: [],
+
 		};
 
 		firebase.auth().onAuthStateChanged( (user) => {
 			if (user) {
 				console.log(user.uid);
 				var usuario = user.uid;
-				this.setState({user:usuario});
+				this.setState({userId:usuario});
 			} else {
 				// No user is signed in.
 				toastr.error('No ha iniciado sesión');
@@ -39,6 +45,9 @@ class diabetesPage extends  Component
 			}
 		});
 	}
+
+
+
 
 
 
@@ -56,14 +65,14 @@ class diabetesPage extends  Component
 
 	}
 
-	guardarIngreso = (gasto) => {
+	guardarMedida = (medida) => {
 
-		const rama = firebase.database().ref('usuarios/' + this.state.userId + '/gastos/' + this.state.dateRama);
+		const rama = firebase.database().ref('usuarios/' + this.state.userId + '/medidas/' + this.state.dateRama);
 
-		rama.push(gasto)
+		rama.push(medida)
 			.then(r=>{
 				toastr.success("Se guardó tu gasto con éxito");
-				this.props.history.push('/gastos');
+				this.toogleShowAdd();
 			}).catch(e=>{
 			toastr.error('Falló, repite', e);
 		});
@@ -78,6 +87,8 @@ class diabetesPage extends  Component
 		for(let i in this.state.medida){
 			console.log(this.state.medida[i]);
 		}
+
+		this.guardarMedida(this.state.medida);
 	}
 
 
