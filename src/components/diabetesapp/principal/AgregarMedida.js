@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal,Button, Form} from 'react-bootstrap';
 import InputBootstrap from "../../common/InputBootstrap";
-
+import {Prompt} from 'react-router-dom';
 class AgregarMedida extends Component {
 
 	render() {
@@ -10,6 +10,12 @@ class AgregarMedida extends Component {
 		const fechaActual = dateNow[0];
 		return (
 			<div style={{marginTop:'45vh'}} className="static-modal">
+				<Prompt
+					when={this.props.isBlocking}
+					message={location => (
+						`¿Estás seguro que quieres salir? Perderas todos tus datos `
+					)}
+				/>
 				<Modal {... this.props.modalOptions} >
 					<Modal.Header>
 						<Modal.Title>Agregar medida</Modal.Title>

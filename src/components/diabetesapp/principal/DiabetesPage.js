@@ -93,12 +93,6 @@ class diabetesPage extends  Component
 	{
 		return (
 			<div style={{marginTop:'10vh'}} className="diabetes-page">
-				<Prompt
-					when={this.state.isBlocking}
-					message={location => (
-						`¿Estás seguro que quieres salir? Perderas todos tus datos `
-					)}
-				/>
 				<Grid>
 					<Row>
 						<Col xs={12} sm={12} md={12} lg={12} >
@@ -136,6 +130,7 @@ class diabetesPage extends  Component
 						onClick={this.toogleShowAdd}
 						onChange={this.handleChange}
 						onSubmit={this.handleSubmit}
+						isBlocking={this.state.isBlocking}
 					/>
 					}
 				</Grid>
