@@ -5,7 +5,8 @@ import toastr from 'toastr';
 import './DiabetesPage.css';
 import Grafica from "./Grafica";
 import Tabla from "./Tabla";
-import {NavLink} from 'react-router-dom';
+import AgregarMedida from "./AgregarMedida";
+import {Prompt} from 'react-router-dom';
 
 
 
@@ -15,7 +16,14 @@ class diabetesPage extends  Component
 	constructor(props){
 		super(props);
 		this.state = {
-			user: ''
+			user: '',
+			showAddNew: false,
+			isBlocking:false,
+			medida:{
+				medida: 0,
+				descripcion: '',
+				fecha: ''
+			}
 		};
 
 		firebase.auth().onAuthStateChanged( (user) => {
@@ -30,13 +38,67 @@ class diabetesPage extends  Component
 				this.props.history.push("/login");
 			}
 		});
+	}
 
+
+
+	// actualizarMedidaState = (value) => {
+	// 	let medida = this.state.medida;
+	// 	medida[e.target.name] = value;
+	// 	this.setState({medida,isBlocking:true});
+	// }
+
+	handleChange = (e) => {
+
+		let medida = this.state.medida;
+		medida[e.target.name] = e.target.value;
+		this.setState({medida,isBlocking:true});
 
 	}
+
+	guardarIngreso = (gasto) => {
+
+		const rama = firebase.database().ref('usuarios/' + this.state.userId + '/gastos/' + this.state.dateRama);
+
+		rama.push(gasto)
+			.then(r=>{
+				toastr.success("Se guardó tu gasto con éxito");
+				this.props.history.push('/gastos');
+			}).catch(e=>{
+			toastr.error('Falló, repite', e);
+		});
+
+	}
+
+	handleSubmit = (e) => {
+		e.preventDefault();
+		this.setState({isBlocking:false});
+
+		//this.guardarIngreso(this.state.gasto);
+		for(let i in this.state.medida){
+			console.log(this.state.medida[i]);
+		}
+	}
+
+
+	toogleShowAdd = () => {
+		let showAddNew = this.state.showAddNew;
+		showAddNew = !showAddNew;
+		this.setState({showAddNew});
+	}
+
+
+
 	render()
 	{
 		return (
 			<div style={{marginTop:'10vh'}} className="diabetes-page">
+				<Prompt
+					when={this.state.isBlocking}
+					message={location => (
+						`¿Estás seguro que quieres salir? Perderas todos tus datos `
+					)}
+				/>
 				<Grid>
 					<Row>
 						<Col xs={12} sm={12} md={12} lg={12} >
@@ -56,10 +118,26 @@ class diabetesPage extends  Component
 									]}
 							/>
 
-							<Button bsStyle="primary">Agregar Medida</Button>
+							<Button
+								bsStyle="primary"
+								onClick={this.toogleShowAdd}>
+								Agregar Medida
+							</Button>
 
 						</Col>
 					</Row>
+
+					{this.state.showAddNew &&
+					<AgregarMedida
+						modalOptions={{
+							show: this.state.showAddNew,
+							onHide: this.toogleShowAdd
+						}}
+						onClick={this.toogleShowAdd}
+						onChange={this.handleChange}
+						onSubmit={this.handleSubmit}
+					/>
+					}
 				</Grid>
 			</div>
 
