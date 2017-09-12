@@ -14,12 +14,13 @@ class LoginPage extends Component {
 				console.log(user.uid);
 				// var usuario = user.uid;
 				// this.setState({user:usuario});
+				toastr.error('Debe cerrar sesión');
 				this.props.history.push("/diabetes");
 			} else {
 				// No user is signed in.
 				//toastr.error('No ha iniciado sesión');
 				//alert('No ha iniciado sesión');
-				
+
 			}
 		});
 	}

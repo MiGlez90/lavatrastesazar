@@ -6,7 +6,7 @@ import './DiabetesPage.css';
 import Grafica from "./Grafica";
 import Tabla from "./Tabla";
 import AgregarMedida from "./AgregarMedida";
-import {Prompt} from 'react-router-dom';
+//import {Prompt} from 'react-router-dom';
 
 
 
