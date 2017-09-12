@@ -5,7 +5,7 @@ import HomePageLavaTrastes from './components/principalLavarTrastesApp/HomePageL
 import DiabetesPage from './components/diabetesapp/principal/DiabetesPage';
 import LoginPage from "./components/login/LoginPage";
 import SignupPage from "./components/signup/SignupPage";
-import AgregarMedida from "./components/diabetesapp/principal/AgregarMedida";
+//import AgregarMedida from "./components/diabetesapp/principal/AgregarMedida";
 
 const Routes = () => (
 
@@ -15,7 +15,7 @@ const Routes = () => (
 	        <Route path='/diabetes' component={DiabetesPage} />
 	        <Route path='/login' component={LoginPage}/>
 	        <Route path='/signup' component={SignupPage}/>
-	        <Route path='/agregarMedida' component={AgregarMedida}/>
+	        {/*<Route path='/agregarMedida' component={AgregarMedida}/>*/}
         </Switch>
 
 );

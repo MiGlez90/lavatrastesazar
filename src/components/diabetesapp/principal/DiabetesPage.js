@@ -55,9 +55,8 @@ class diabetesPage extends  Component
 
 									]}
 							/>
-							<NavLink to='/agregarMedida'>
-								<Button bsStyle="primary">Agregar Medida</Button>
-							</NavLink>
+
+							<Button bsStyle="primary">Agregar Medida</Button>
 
 						</Col>
 					</Row>
