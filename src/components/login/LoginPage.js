@@ -7,6 +7,22 @@ import toastr from 'toastr';
 
 
 class LoginPage extends Component {
+	constructor(props){
+		super(props);
+		firebase.auth().onAuthStateChanged( (user) => {
+			if (user) {
+				console.log(user.uid);
+				// var usuario = user.uid;
+				// this.setState({user:usuario});
+				this.props.history.push("/diabetes");
+			} else {
+				// No user is signed in.
+				//toastr.error('No ha iniciado sesión');
+				//alert('No ha iniciado sesión');
+				
+			}
+		});
+	}
 	/* TODO hacer funcionalidad para redes sociales
 	loginWithFacebook = () => {
 		const provider = new firebase.auth.FacebookAuthProvider();
