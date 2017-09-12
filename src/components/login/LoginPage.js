@@ -3,6 +3,7 @@ import '../../App.css';
 import './LoginPage.css';
 import LoginForm from "./LoginForm";
 import firebase from '../../firebase';
+import toastr from 'toastr';
 
 
 class LoginPage extends Component {
@@ -34,19 +35,25 @@ class LoginPage extends Component {
 			firebase.auth()
 				.signInWithEmailAndPassword(user.email, user.password)
 				.then( (result) =>{
-					//toastr.success("Bienvenido");
+					toastr.success("Bienvenido");
 					console.log('Ya estoy adentro');
-					//this.props.history.push('/perfil');
+					this.props.history.push('/diabetes');
 				})
 				.catch( (error) => {
-					//var errorCode = error.code;
-					var errorMessage = error.message;
-					console.log('Algo estuvo mal ' + errorMessage);
-					//toastr.error("Something wrong" + errorMessage);
+					var errorCode = error.code;
+					let errorMessage = '';
+					if( errorCode === 'auth/user-not-found'){
+						errorMessage = 'Usuario no encontrado';
+					}else if(errorCode === 'auth/wrong-password'){
+						errorMessage = 'La contraseña es inválida';
+					}
+
+					console.log('Algo estuvo mal ' + errorCode);
+					toastr.error( errorMessage);
 			});
 
 		}else{
-			alert('me siento vascio');
+			alert('me siento vacio');
 		}
 
 	}

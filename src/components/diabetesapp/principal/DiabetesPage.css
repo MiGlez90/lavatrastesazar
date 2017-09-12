@@ -1,10 +1,8 @@
 .diabetes-page{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	display: block;
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
-	background-image: url('../../../assets/img/diabetes.jpeg');
-	background-size: cover;
+	/*background-image: url('../../../assets/img/diabetes.jpeg');*/
+	/*background-size: cover;*/
 }

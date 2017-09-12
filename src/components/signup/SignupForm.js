@@ -72,9 +72,7 @@ class SignupForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		for(let i in this.state.usuario){
-			console.log(this.state.usuario[i]);
-		}
+		this.props.onSubmit(this.state.usuario);
 	}
 
 	getValidationState  ( cSuccess, cWarning, cError )  {
