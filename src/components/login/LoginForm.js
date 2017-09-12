@@ -10,6 +10,8 @@ import {
 from 'react-bootstrap';
 import InputBootstrap from "../common/InputBootstrap";
 //import FontAwesome from 'react-fontawesome';
+import firebase from '../../firebase';
+import toastr from 'toastr';
 
 class LoginForm extends Component {
 	constructor(props){
@@ -23,6 +25,26 @@ class LoginForm extends Component {
 				longitudPass: true
 			}
 		};
+
+		firebase.auth().onAuthStateChanged( (user) => {
+			if (user) {
+				for(let x in user){
+					console.log(x + ' : ' + user[x]);
+				}
+
+
+
+				//this.setState({user:usuario});
+			} else {
+				// No user is signed in.
+				//toastr.error('No ha iniciado sesión');
+				//alert('No ha iniciado sesión');
+
+
+
+			}
+
+		});
 	}
 
 	handleChange = (e) => {
