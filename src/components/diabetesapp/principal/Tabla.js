@@ -13,7 +13,7 @@ class Tabla extends Component {
 			}, {
 				text: 'Todos', value: this.props.data.length
 			} ], // you can change the dropdown list for size per page
-			sizePerPage: 2,  // which size per page you want to locate as default
+			sizePerPage: 8,  // which size per page you want to locate as default
 			pageStartIndex: 1, // where to start counting the pages
 			paginationSize: 3,  // the pagination bar size.
 			//prePage: 'Prev', // Previous page button text

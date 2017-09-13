@@ -29,14 +29,21 @@ class diabetesPage extends  Component
 			},
 			dateRama: ffecha,
 			medidasLista: [],
-
 		};
 
+
+
+
+	}
+
+	componentWillMount(){
 		firebase.auth().onAuthStateChanged( (user) => {
 			if (user) {
 				console.log(user.uid);
 				var usuario = user.uid;
 				this.setState({userId:usuario});
+				this.recuperarMedidas();
+
 			} else {
 				// No user is signed in.
 				toastr.error('No ha iniciado sesión');
@@ -44,6 +51,8 @@ class diabetesPage extends  Component
 				this.props.history.push("/login");
 			}
 		});
+
+
 	}
 
 
@@ -65,12 +74,32 @@ class diabetesPage extends  Component
 
 	}
 
+	recuperarMedidas = () => {
+		//let path =  '/medidas/'+ this.state.userId + this.state.dateRama;
+		firebase.database().ref( '/medidas/'+ this.state.userId + this.state.dateRama)
+			.on('child_added',
+				(s) => {
+					const medidasLista = this.state.medidasLista;
+					let item = s.val();
+					const key = s.key;
+					item['key'] = key;
+					medidasLista.push(item);
+					this.setState({medidasLista});
+			});
+			// .catch(
+			// (error) => {
+			// 	console.log(error);
+			// });
+
+	}
+
 	guardarMedida = (medida) => {
 
-		const rama = firebase.database().ref('usuarios/' + this.state.userId + '/medidas/' + this.state.dateRama);
+		const rama = firebase.database().ref( '/medidas/'+ this.state.userId + this.state.dateRama);
 
 		rama.push(medida)
-			.then(r=>{
+			.then((r) =>{
+				console.log('Nuevo dato:' + r);
 				toastr.success("Se guardó tu gasto con éxito");
 				this.toogleShowAdd();
 			}).catch(e=>{
@@ -89,6 +118,7 @@ class diabetesPage extends  Component
 		}
 
 		this.guardarMedida(this.state.medida);
+
 	}
 
 
@@ -105,22 +135,18 @@ class diabetesPage extends  Component
 		return (
 			<div style={{marginTop:'10vh'}} className="diabetes-page">
 				<Grid>
-					<Row>
-						<Col xs={12} sm={12} md={12} lg={12} >
+					<Row >
+						<Col xs={12} sm={12} md={6} lg={6} >
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
-							<Grafica/>
+							<Grafica
+
+							/>
+						</Col>
+						<Col xs={12} sm={12} md={6} lg={6}>
 							<h2>Detalles de las muestras</h2>
 							<Tabla
-								data={[
-
-										{medida:298,descripcion:'Mucha carne',fecha:'12-08-1990'},
-										{medida:90,descripcion:'Mucha arroz',fecha:'12-08-1991'},
-										{medida:100,descripcion:'Mucha prote',fecha:'12-08-1992'},
-										{medida:212,descripcion:'Mucha papata',fecha:'12-08-1993'},
-										{medida:215,descripcion:'sipi',fecha:'12-08-1993'},
-
-									]}
+								data={this.state.medidasLista}
 							/>
 
 							<Button
@@ -131,20 +157,27 @@ class diabetesPage extends  Component
 
 						</Col>
 					</Row>
+					<Row>
 
-					{this.state.showAddNew &&
-					<AgregarMedida
-						modalOptions={{
-							show: this.state.showAddNew,
-							onHide: this.toogleShowAdd
-						}}
-						onClick={this.toogleShowAdd}
-						onChange={this.handleChange}
-						onSubmit={this.handleSubmit}
-						isBlocking={this.state.isBlocking}
-					/>
-					}
+					</Row>
+					<Row>
+						{this.state.showAddNew &&
+						<AgregarMedida
+							modalOptions={{
+								show: this.state.showAddNew,
+								onHide: this.toogleShowAdd
+							}}
+							onClick={this.toogleShowAdd}
+							onChange={this.handleChange}
+							onSubmit={this.handleSubmit}
+							isBlocking={this.state.isBlocking}
+						/>
+						}
+					</Row>
+
+
 				</Grid>
+
 			</div>
 
 		);
