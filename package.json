@@ -17,7 +17,7 @@
     "react-native-fab": "^1.0.5",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.12",
+    "react-scripts": "^1.0.12",
     "sweetalert-react": "^0.4.10",
     "toastr": "^2.1.2"
   },
