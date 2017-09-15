@@ -6,6 +6,8 @@ import './DiabetesPage.css';
 import Grafica from "./Grafica";
 import Tabla from "./Tabla";
 import AgregarMedida from "./AgregarMedida";
+import swal from 'sweetalert2'
+//import SweetAlert from 'sweetalert-react';
 //import {Prompt} from 'react-router-dom';
 
 
@@ -123,10 +125,37 @@ class diabetesPage extends  Component
 
 
 	toogleShowAdd = () => {
-		let showAddNew = this.state.showAddNew;
-		showAddNew = !showAddNew;
-		this.setState({showAddNew});
+        if ( this.state.isBlocking ) {
+            swal({
+                title: 'Seguro que quieres salir?',
+                text: "Perderas tus datos!!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Salir'
+            }).then( () => {
+                    let showAddNew = this.state.showAddNew;
+                    showAddNew = !showAddNew;
+                    this.setState({showAddNew});
+
+            })
+        }else{
+            let showAddNew = this.state.showAddNew;
+            showAddNew = !showAddNew;
+            this.setState({showAddNew});
+        }
+
+
 	}
+
+	openShowAdd = ( ) => {
+        let showAddNew = this.state.showAddNew;
+        let isBlocking = this.state.isBlocking;
+        showAddNew = true;
+        isBlocking = false;
+        this.setState({showAddNew,isBlocking});
+    }
 
 
 
@@ -151,7 +180,7 @@ class diabetesPage extends  Component
 
 							<Button
 								bsStyle="primary"
-								onClick={this.toogleShowAdd}>
+								onClick={this.openShowAdd}>
 								Agregar Medida
 							</Button>
 
@@ -162,17 +191,18 @@ class diabetesPage extends  Component
 					</Row>
 					<Row>
 						{this.state.showAddNew &&
-						<AgregarMedida
-							modalOptions={{
-								show: this.state.showAddNew,
-								onHide: this.toogleShowAdd
-							}}
-							onClick={this.toogleShowAdd}
-							onChange={this.handleChange}
-							onSubmit={this.handleSubmit}
-							isBlocking={this.state.isBlocking}
-						/>
+						    <AgregarMedida
+                                modalOptions={{
+                                    show: this.state.showAddNew,
+                                    onHide: this.toogleShowAdd
+                                }}
+                                onClick={this.toogleShowAdd}
+							    onChange={this.handleChange}
+							    onSubmit={this.handleSubmit}
+                                isBlocking={this.state.isBlocking}
+                            />
 						}
+
 					</Row>
 
 

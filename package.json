@@ -19,6 +19,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.12",
     "sweetalert-react": "^0.4.10",
+    "sweetalert2": "^6.8.0",
     "toastr": "^2.1.2"
   },
   "scripts": {

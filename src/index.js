@@ -8,6 +8,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import 'toastr/build/toastr.min.css';
 import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import '../node_modules/sweetalert/dist/sweetalert.css';
+import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
 
 const WithRouter = () => (
     <BrowserRouter>
