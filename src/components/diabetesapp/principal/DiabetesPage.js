@@ -7,6 +7,7 @@ import Grafica from "./Grafica";
 import Tabla from "./Tabla";
 import AgregarMedida from "./AgregarMedida";
 import swal from 'sweetalert2'
+import moment from 'moment';
 //import SweetAlert from 'sweetalert-react';
 //import {Prompt} from 'react-router-dom';
 
@@ -17,9 +18,7 @@ class diabetesPage extends  Component
 {
 	constructor(props){
 		super(props);
-		const fechaActual = new Date();
-		const ffecha = fechaActual.getMonth() + 'de' +fechaActual.getFullYear();
-		console.log('ffecha'+ffecha);
+		const fechaActual = moment().format('YYYY-MM-DD');
 		this.state = {
 			userId: '',
 			showAddNew: false,
@@ -29,7 +28,7 @@ class diabetesPage extends  Component
 				descripcion: '',
 				fecha: ''
 			},
-			dateRama: ffecha,
+			dateRama: fechaActual,
 			medidasLista: [],
 		};
 
@@ -150,17 +149,12 @@ class diabetesPage extends  Component
 	}
 
 	openShowAdd = ( ) => {
-        let showAddNew = this.state.showAddNew;
-        let isBlocking = this.state.isBlocking;
-        showAddNew = true;
-        isBlocking = false;
-        this.setState({showAddNew,isBlocking});
+        this.setState({showAddNew: true ,isBlocking: false});
     }
 
 
 
-	render()
-	{
+	render() {
 		return (
 			<div style={{marginTop:'10vh'}} className="diabetes-page">
 				<Grid>
@@ -169,14 +163,12 @@ class diabetesPage extends  Component
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
 							<Grafica
-								datos={this.state.medidasLista}
-							/>
+								datos={this.state.medidasLista}/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
 							<h2>Detalles de las muestras</h2>
 							<Tabla
-								data={this.state.medidasLista}
-							/>
+								data={this.state.medidasLista}/>
 
 							<Button
 								bsStyle="primary"
@@ -187,10 +179,11 @@ class diabetesPage extends  Component
 						</Col>
 					</Row>
 					<Row>
-
+                        {/*Blank on purpouse*/}
 					</Row>
 					<Row>
-						{this.state.showAddNew &&
+						{
+							this.state.showAddNew &&
 						    <AgregarMedida
                                 modalOptions={{
                                     show: this.state.showAddNew,
@@ -202,10 +195,7 @@ class diabetesPage extends  Component
                                 isBlocking={this.state.isBlocking}
                             />
 						}
-
 					</Row>
-
-
 				</Grid>
 
 			</div>
