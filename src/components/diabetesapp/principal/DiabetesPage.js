@@ -140,7 +140,7 @@ class diabetesPage extends  Component
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
 							<Grafica
-
+								datos={this.state.medidasLista}
 							/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>

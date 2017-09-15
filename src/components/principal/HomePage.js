@@ -9,7 +9,6 @@ class HomePage extends Component{
 	}
 	render(){
 		return(
-
 			<Grid className="homePage">
 				<Row>
 					<h1>Hola</h1>
