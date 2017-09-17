@@ -27,7 +27,7 @@ class diabetesPage extends  Component
 			medida:{
 				medida: 0,
 				descripcion: '',
-				fecha: ''
+				fecha: fechaActual
 			},
 			dateRama: fechaActual,
 			medidasLista: [],
@@ -101,7 +101,7 @@ class diabetesPage extends  Component
 
 		rama.push(medida)
 			.then((r) =>{
-				console.log('Nuevo dato:' + r);
+				//console.log('Nuevo dato:' + r);
 				toastr.success("Se guardó tu gasto con éxito");
 				this.toogleShowAdd();
 			}).catch(e=>{
@@ -119,14 +119,18 @@ class diabetesPage extends  Component
 
 		//cambia el formato de la fecha antes de mandar los datos
         //al servidor
+        for(let i in this.state.medida){
+            console.log(this.state.medida[i]);
+        }
+
         let medida = this.state.medida;
         medida['fecha'] = moment(medida['fecha'],'YYYY-MM-DD').format('DD MMMM YYYY');
         this.setState({medida});
 
         //Imprime los datos que se van a mandar
-        // for(let i in this.state.medida){
-        //     console.log(this.state.medida[i]);
-        // }
+        for(let i in this.state.medida){
+            console.log(this.state.medida[i]);
+        }
 
         // guarda la medida
 
@@ -161,7 +165,9 @@ class diabetesPage extends  Component
 	}
 
 	openShowAdd = ( ) => {
-        this.setState({showAddNew: true ,isBlocking: false});
+        let medida = this.state.medida;
+        medida['fecha'] = this.state.dateRama;
+	    this.setState({showAddNew: true ,isBlocking: false, medida});
     }
 
 
