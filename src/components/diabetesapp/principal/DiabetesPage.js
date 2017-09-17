@@ -119,18 +119,15 @@ class diabetesPage extends  Component
 
 		//cambia el formato de la fecha antes de mandar los datos
         //al servidor
-        for(let i in this.state.medida){
-            console.log(this.state.medida[i]);
-        }
 
         let medida = this.state.medida;
         medida['fecha'] = moment(medida['fecha'],'YYYY-MM-DD').format('DD MMMM YYYY');
         this.setState({medida});
 
         //Imprime los datos que se van a mandar
-        for(let i in this.state.medida){
-            console.log(this.state.medida[i]);
-        }
+        // for(let i in this.state.medida){
+        //     console.log(this.state.medida[i]);
+        // }
 
         // guarda la medida
 
