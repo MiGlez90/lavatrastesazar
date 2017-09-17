@@ -1,35 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 .App {
   text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 .App-flex{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-  background-image: url('./assets/img/family.jpeg');
-  min-height: 100%;
-  background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100vw;
+   height: 100vh;
+   text-align: center;
+   background-image: url('./assets/img/family.jpeg');
+   min-height: 100%;
+   background-size: cover;
+   font-family: 'Roboto', sans-serif;
 }
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

@@ -21,14 +21,14 @@ class Tabla extends Component {
 			//firstPage: 'First', // First page button text
 			//lastPage: 'Last', // Last page button text
 			//paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
-			//paginationPosition: 'top'  // default is bottom, top and both is all available
+			paginationPosition: 'bottom',  // default is bottom, top and both is all available
 			hideSizePerPage: true //You can hide the dropdown for sizePerPage
 			// alwaysShowAllBtns: true // Always show next and previous button
 			// withFirstAndLast: false > Hide the going to First and Last page button
 		};
 
 		return (
-			<BootstrapTable data={ this.props.data } pagination={ true } options={ options }>
+			<BootstrapTable data={ this.props.data } pagination={ true } options={ options } >
 				<TableHeaderColumn dataField='medida' isKey>Medida</TableHeaderColumn>
 				<TableHeaderColumn dataField='descripcion'>Descripción</TableHeaderColumn>
 				<TableHeaderColumn dataField='fecha'>Fecha</TableHeaderColumn>

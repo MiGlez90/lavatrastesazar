@@ -6,3 +6,27 @@
 	/*background-image: url('../../../assets/img/diabetes.jpeg');*/
 	/*background-size: cover;*/
 }
+
+
+
+@media screen and (max-width: 767px) {
+    .fab {
+        display: initial;
+    }
+
+    .buttonNormal{
+        display: none;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .fab {
+        display: none;
+    }
+
+    .buttonNormal{
+        display: initial;
+    }
+}
+

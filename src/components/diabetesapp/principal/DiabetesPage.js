@@ -9,9 +9,19 @@ import AgregarMedida from "./AgregarMedida";
 import swal from 'sweetalert2'
 import * as moment from 'moment';
 import 'moment/locale/es';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 //import SweetAlert from 'sweetalert-react';
 //import {Prompt} from 'react-router-dom';
 
+const style = {
+    margin: 0,
+    top: 'auto',
+    right: 'auto',
+    bottom: 20,
+    left: 20,
+    position: 'fixed',
+};
 
 
 
@@ -182,14 +192,27 @@ class diabetesPage extends  Component
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
 							<h2>Detalles de las muestras</h2>
-							<Tabla
-								data={this.state.medidasLista}/>
+							<div style={{marginBottom:20}}>
+                                <Tabla
+                                    data={this.state.medidasLista}/>
+                            </div>
 
-							<Button
-								bsStyle="primary"
-								onClick={this.openShowAdd}>
-								Agregar Medida
-							</Button>
+
+                            <div className="fab">
+                                <FloatingActionButton  style={style} onClick={this.openShowAdd}>
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                            </div>
+
+                            <div className="buttonNormal">
+                                <Button
+                                    bsStyle="primary"
+                                    onClick={this.openShowAdd}>
+                                    Agregar Medida
+                                </Button>
+                            </div>
+
+
 
 						</Col>
 					</Row>
@@ -210,6 +233,7 @@ class diabetesPage extends  Component
                                 isBlocking={this.state.isBlocking}
                                 fechaActual={this.state.dateRama}
                             />
+
 						}
 					</Row>
 				</Grid>
