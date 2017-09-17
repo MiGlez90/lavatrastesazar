@@ -231,7 +231,7 @@ class diabetesPage extends  Component
 							    onChange={this.handleChange}
 							    onSubmit={this.handleSubmit}
                                 isBlocking={this.state.isBlocking}
-                                fechaActual={this.state.dateRama}
+                                fechaActual={this.state.medida.fecha}
                             />
 
 						}
