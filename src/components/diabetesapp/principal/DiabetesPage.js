@@ -7,7 +7,8 @@ import Grafica from "./Grafica";
 import Tabla from "./Tabla";
 import AgregarMedida from "./AgregarMedida";
 import swal from 'sweetalert2'
-import moment from 'moment';
+import * as moment from 'moment';
+import 'moment/locale/es';
 //import SweetAlert from 'sweetalert-react';
 //import {Prompt} from 'react-router-dom';
 
@@ -76,8 +77,8 @@ class diabetesPage extends  Component
 	}
 
 	recuperarMedidas = () => {
-		//let path =  '/medidas/'+ this.state.userId + this.state.dateRama;
-		firebase.database().ref( '/medidas/'+ this.state.userId + this.state.dateRama)
+		//let path =  '/medidas/'+ this.state.userId + '/  + this.state.dateRama;
+		firebase.database().ref( '/medidas/'+ this.state.userId + '/' +  moment().format('YYYY') + '/' + moment().format('MM'))
 			.on('child_added',
 				(s) => {
 					const medidasLista = this.state.medidasLista;
@@ -96,7 +97,7 @@ class diabetesPage extends  Component
 
 	guardarMedida = (medida) => {
 
-		const rama = firebase.database().ref( '/medidas/'+ this.state.userId + this.state.dateRama);
+		const rama = firebase.database().ref( '/medidas/'+ this.state.userId + '/' +  moment().format('YYYY') + '/' + moment().format('MM'));
 
 		rama.push(medida)
 			.then((r) =>{
@@ -113,10 +114,21 @@ class diabetesPage extends  Component
 		e.preventDefault();
 		this.setState({isBlocking:false});
 
-		//this.guardarIngreso(this.state.gasto);
-		for(let i in this.state.medida){
-			console.log(this.state.medida[i]);
-		}
+        //cambia la locación para que las fechas sean en español
+        moment.locale('es');
+
+		//cambia el formato de la fecha antes de mandar los datos
+        //al servidor
+        let medida = this.state.medida;
+        medida['fecha'] = moment(medida['fecha'],'YYYY-MM-DD').format('DD MMMM YYYY');
+        this.setState({medida});
+
+        //Imprime los datos que se van a mandar
+        // for(let i in this.state.medida){
+        //     console.log(this.state.medida[i]);
+        // }
+
+        // guarda la medida
 
 		this.guardarMedida(this.state.medida);
 
@@ -130,8 +142,8 @@ class diabetesPage extends  Component
                 text: "Perderas tus datos!!",
                 type: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                //confirmButtonColor: '#3085d6',
+                //cancelButtonColor: '#d33',
                 confirmButtonText: 'Salir'
             }).then( () => {
                     let showAddNew = this.state.showAddNew;
