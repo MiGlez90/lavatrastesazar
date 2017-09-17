@@ -1,20 +1,11 @@
 import React from 'react';
 import {Modal,Button, Form} from 'react-bootstrap';
 import InputBootstrap from "../../common/InputBootstrap";
-import {Prompt} from 'react-router-dom';
+
 
 const AgregarMedida = (props) => {
-    const date = new Date().toISOString();
-    let dateNow = date.split('T');
-    const fechaActual = dateNow[0];
     return (
         <div style={{marginTop:'45vh'}} className="static-modal">
-            <Prompt
-                when={props.isBlocking}
-                message={location => (
-                    `¿Estás seguro que quieres salir? Perderas todos tus datos `
-                )}
-            />
             <Modal {... props.modalOptions} >
                 <Modal.Header>
                     <Modal.Title>Agregar medida</Modal.Title>
@@ -36,7 +27,8 @@ const AgregarMedida = (props) => {
                                 placeholder:"Medida",
                                 min: 0,
                                 max: 700,
-                                maxLength: "3"
+                                maxLength: "3",
+                                style:{paddingRight:0}
                             }}
 
                         />
@@ -48,7 +40,8 @@ const AgregarMedida = (props) => {
                                 onChange:props.onChange,
                                 name:"descripcion",
                                 type:"text",
-                                placeholder:"Descripción"
+                                placeholder:"Descripción",
+                                style:{paddingRight:0}
                             }}
 
                         />
@@ -61,7 +54,9 @@ const AgregarMedida = (props) => {
                                 name:"fecha",
                                 type:"date",
                                 placeholder:"Fecha",
-                                max: fechaActual
+                                max: props.fechaActual,
+                                value: props.fechaActual,
+                                style:{paddingRight:0}
                             }}
 
                         />
