@@ -1,9 +1,12 @@
 import React from 'react';
 import {Modal,Button, Form} from 'react-bootstrap';
 import InputBootstrap from "../../common/InputBootstrap";
+import * as moment from 'moment';
 
 
 const AgregarMedida = (props) => {
+    let fechaActual = props.fechaActual;
+    fechaActual = moment(fechaActual,['DD MMMM YYYY','YYYY MM DD']).format('YYYY[-]MM[-]DD');
     return (
         <div style={{marginTop:'45vh'}} className="static-modal">
             <Modal {... props.modalOptions} >
@@ -54,8 +57,8 @@ const AgregarMedida = (props) => {
                                 name:"fecha",
                                 type:"date",
                                 placeholder:"Fecha",
-                                max: props.fechaActual,
-                                value: props.fechaActual,
+                                max: fechaActual,
+                                value: fechaActual,
                                 style:{paddingRight:0}
                             }}
 

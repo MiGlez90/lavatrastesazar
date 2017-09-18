@@ -98,13 +98,13 @@ class diabetesPage extends  Component
 					moment.locale('es');
 			        const medidasLista = this.state.medidasLista;
 					let grafica = this.state.grafica;
-                    console.log(s.val());
+                    //console.log(s.val());
 					let item = s.val();
 					const key = s.key;
 					item['key'] = key;
 					medidasLista.push(item);
 					grafica.labels.push(moment(item.fecha, 'DD MMMM YYYY').format('DD MMM'));
-					console.log('Fecha : ' + item.fecha);
+					console.log('Medida : ' + parseInt(item.medida, 10));
 					grafica.data.push(parseInt(item.medida, 10));
 
 					this.setState({medidasLista,grafica});
@@ -142,7 +142,8 @@ class diabetesPage extends  Component
         //al servidor
 
         let medida = this.state.medida;
-        medida['fecha'] = moment(medida['fecha'],'YYYY-MM-DD').format('DD MMMM YYYY');
+        console.log('Fecha ' + medida.fecha);
+        medida['fecha'] = moment(medida.fecha,'YYYY MM DD').format('DD MMMM YYYY');
         this.setState({medida});
 
         //Imprime los datos que se van a mandar
@@ -184,6 +185,7 @@ class diabetesPage extends  Component
 
 	openShowAdd = ( ) => {
         let medida = this.state.medida;
+        console.log('Fecha al input: ' +  this.state.dateRama);
         medida['fecha'] = this.state.dateRama;
 	    this.setState({showAddNew: true ,isBlocking: false, medida});
     }
@@ -198,7 +200,7 @@ class diabetesPage extends  Component
 						<Col xs={12} sm={12} md={6} lg={6} >
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
-							<Grafica
+                            <Grafica
 								grafica={this.state.grafica}/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
