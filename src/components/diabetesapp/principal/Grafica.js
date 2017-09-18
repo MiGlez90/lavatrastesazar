@@ -4,22 +4,13 @@ import {Line} from 'react-chartjs-2';
 class Grafica extends Component {
 
 	render() {
-		const datosProps = this.props.datos;
-		let dataDataSet = [];
-		let labels = [];
-		if( typeof datosProps !== 'undefined' && datosProps !== null){
 
-			datosProps.forEach( (dato) => {
-				dataDataSet.push(dato.medida);
-				labels.push(dato.fecha);
-			});
-		}
 
 		// console.log('This props :' + this.props.datos);
 		const data = {
 			datasets:[
 				{
-					data:dataDataSet, //[100,80],
+					data:this.props.grafica.data, //[100,80],
 					backgroundColor:"rgba(75,192,192,0.8)",
 					borderCapStyle:"butt",
 					borderColor: "rgba(75,192,192,1)",
@@ -39,7 +30,7 @@ class Grafica extends Component {
 					pointRadius: 1,
 				}
 			],
-			labels: labels //['cien','ochenta']
+			labels: this.props.grafica.labels //['cien','ochenta']
 
 		};
 		const legend = {
@@ -60,12 +51,13 @@ class Grafica extends Component {
 		};
 
         return (
-			<div
+        	<div
 				style={{
 					marginTop:'10vh'
 				}}>
-
-				<Line  data={data}  options={options} height={200} legend={legend} responsive={true} />
+                {typeof this.props.grafica.data !== 'undefined' && this.props.grafica.data !== null &&
+				    <Line data={data} options={options} height={200} legend={legend} responsive={true}/>
+                }
 			</div>
 		);
 	}

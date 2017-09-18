@@ -41,6 +41,10 @@ class diabetesPage extends  Component
 			},
 			dateRama: fechaActual,
 			medidasLista: [],
+			grafica: {
+			    data: [],
+                labels: []
+            }
 		};
 
 
@@ -91,12 +95,19 @@ class diabetesPage extends  Component
 		firebase.database().ref( '/medidas/'+ this.state.userId + '/' +  moment().format('YYYY') + '/' + moment().format('MM'))
 			.on('child_added',
 				(s) => {
-					const medidasLista = this.state.medidasLista;
+					moment.locale('es');
+			        const medidasLista = this.state.medidasLista;
+					let grafica = this.state.grafica;
+                    console.log(s.val());
 					let item = s.val();
 					const key = s.key;
 					item['key'] = key;
 					medidasLista.push(item);
-					this.setState({medidasLista});
+					grafica.labels.push(moment(item.fecha, 'DD MMMM YYYY').format('DD MMM'));
+					console.log('Fecha : ' + item.fecha);
+					grafica.data.push(parseInt(item.medida, 10));
+
+					this.setState({medidasLista,grafica});
 			});
 			// .catch(
 			// (error) => {
@@ -188,7 +199,7 @@ class diabetesPage extends  Component
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
 							<Grafica
-								datos={this.state.medidasLista}/>
+								grafica={this.state.grafica}/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
 							<h2>Detalles de las muestras</h2>
