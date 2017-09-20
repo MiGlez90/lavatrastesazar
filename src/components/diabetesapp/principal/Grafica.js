@@ -2,6 +2,7 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 
 
+
 /* TODO hacer que funcione */
 const Grafica = (props) => {
     let datos = [];

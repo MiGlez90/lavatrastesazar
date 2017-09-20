@@ -40,11 +40,7 @@ class diabetesPage extends  Component
 				fecha: fechaActual
 			},
 			dateRama: fechaActual,
-			medidasLista: [],
-			grafica: {
-			    data: [],
-                labels: []
-            }
+			medidasLista: []
 		};
 
 
@@ -97,17 +93,13 @@ class diabetesPage extends  Component
 				(s) => {
 					moment.locale('es');
 			        const medidasLista = this.state.medidasLista;
-					let grafica = this.state.grafica;
                     //console.log(s.val());
 					let item = s.val();
 					const key = s.key;
 					item['key'] = key;
 					medidasLista.push(item);
-					grafica.labels.push(moment(item.fecha, 'DD MMMM YYYY').format('DD MMM'));
-					console.log('Medida : ' + parseInt(item.medida, 10));
-					grafica.data.push(parseInt(item.medida, 10));
 
-					this.setState({medidasLista,grafica});
+					this.setState({medidasLista});
 			});
 			// .catch(
 			// (error) => {
