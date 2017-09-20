@@ -1,6 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
-
+import * as moment from 'moment';
 
 
 /* TODO hacer que funcione */
@@ -11,7 +11,9 @@ const Grafica = (props) => {
     const longitud = props.medidasLista.length > 7 ? 7 : props.medidasLista.length ;
         for (let i = 0 ; i < longitud; i++) {
             datos.push( props.medidasLista[i].medida );
-            etiquetas.push( props.medidasLista[i].fecha  );
+            let fechaLarga = props.medidasLista[i].fecha;
+            let fechaCorta = moment(fechaLarga, 'DD MMMM YYYY').format('DD MMM');
+            etiquetas.push( fechaCorta );
         }
 
 
