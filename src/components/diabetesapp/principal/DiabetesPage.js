@@ -201,7 +201,7 @@ class diabetesPage extends  Component
 							<h1>Control Diabetes</h1>
 							<h2>Grafica de mis últimas muestras</h2>
                             <Grafica
-								grafica={this.state.grafica}/>
+								medidasLista={this.state.medidasLista}/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
 							<h2>Detalles de las muestras</h2>
