@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Navbar,NavItem,Nav} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as usuarioActions from '../../actions/usuarioActions';
 import './NavBarResponsive.css';
 
 class NavBarResponsive extends Component {
@@ -50,24 +53,47 @@ class NavBarResponsive extends Component {
 							<MenuItem eventKey={3.3}>Separated link</MenuItem>
 						</NavDropdown>*/}
 					</Nav>
-					<Nav pullRight>
-						<LinkContainer to="/login">
-							<NavItem eventKey="login" >
-								Entrar
-							</NavItem>
-						</LinkContainer>
-						<LinkContainer to="/signup">
-							<NavItem eventKey="signup" >
-								Sign up
-							</NavItem>
-						</LinkContainer>
+
+                        { typeof this.props.usuario === 'undefined' || this.props.usuario === null ?
+							<Nav pullRight>
+								<LinkContainer to="/login">
+									<NavItem eventKey="login" >
+										Entrar
+									</NavItem>
+								</LinkContainer>
+								<LinkContainer to="/signup">
+									<NavItem eventKey="signup" >
+										Sign up
+									</NavItem>
+								</LinkContainer>
+							</Nav>
+							:
+							<Nav pullRight>
+								<NavItem onClick={()=>this.props.usuarioActions.cerrarSesion()} eventKey="cerrasesion" >
+									Cerrar Sesión
+								</NavItem>
+							</Nav>
+
+						}
 
 
-					</Nav>
+
 				</Navbar.Collapse>
 			</Navbar>
 		);
 	}
 }
 
-export default NavBarResponsive;
+function mapStateToProps(state, ownProps) {
+	return {
+		usuario: state.usuario
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		usuarioActions: bindActionCreators(usuarioActions,dispatch)
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (NavBarResponsive);

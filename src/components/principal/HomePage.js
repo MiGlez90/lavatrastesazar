@@ -1,12 +1,16 @@
 import React, {Component } from 'react';
 import {Grid,Row,Col} from 'react-bootstrap';
 //import SweetAlert from 'sweetalert-react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as  usuarioActions from '../../actions/usuarioActions';
 import './HomePage.css';
+
 
 class HomePage extends Component{
 	state = {
 		show: false
-	}
+	};
 	render(){
 		return(
 			<Grid className="homePage">
@@ -21,6 +25,11 @@ class HomePage extends Component{
 							{/*onConfirm={() => this.setState({ show: false })}*/}
 							{/*type="error"*/}
 						{/*/>*/}
+						<button
+							style={{marginTop:80}}
+							onClick={()=>this.props.usuarioActions.cerrarSesion()}
+						>Cerrar sesion
+						</button>
 					</Col>
 				</Row>
 			</Grid>
@@ -28,5 +37,16 @@ class HomePage extends Component{
 	}
 }
 
+function mapStateToProps(state, ownProps) {
+	return {
+		usuario: state.usuario
+	}
+}
 
-export default HomePage;
+function mapDispatchToProps(dispatch) {
+	return {
+		usuarioActions: bindActionCreators(usuarioActions, dispatch)
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (HomePage);

@@ -1,19 +1,19 @@
 import firebase from '../firebase';
 import toastr from 'toastr';
 
-export function iniciarSesion(usuario) {
+export function iniciarSesionAction(usuario) {
     return {type:"INICIAR_SESION" , usuario};
 }
 
-export function cerrarSesion(usuario) {
+export function cerrarSesionAction(usuario) {
     return { type:"CERRAR_SESION" , usuario };
 }
 
-export function comprobarUsuario(usuario) {
+export function comprobarUsuarioAction(usuario) {
     return { type:"COMPROBAR_USUARIO", usuario};
 }
 
-export function iniciarSesionThunk(user) {
+export function iniciarSesion(user) {
     return function (dispatch, getState) {
         if (
             typeof user !== 'undefined'
@@ -22,10 +22,10 @@ export function iniciarSesionThunk(user) {
         ) {
             firebase.auth()
                 .signInWithEmailAndPassword(user.email, user.password)
-                .then((result) => {
+                .then((r) => {
                     toastr.success("Bienvenido");
                     console.log('Ya estoy adentro');
-                    esUsuarioLogueado(user);
+                    dispatch(iniciarSesionAction(r.user));
                     //this.props.history.push('/diabetes');
                 })
                 .catch((error) => {
@@ -47,10 +47,23 @@ export function iniciarSesionThunk(user) {
     }
 }
 
-export function esUsuarioLogueado() {
+export function cerrarSesion() {
+    return function (dispatch,getState) {
+        firebase.auth().signOut()
+            .then( (r) => {
+                console.log('Ya sali ', r);
+                dispatch(cerrarSesionAction(null));
+            }).catch( (error) => {
+                console.error('No pude salir');
+            });
+
+    }
+}
+
+export function comprobarUsuario() {
     return function (dispatch, getState) {
         firebase.auth().onAuthStateChanged((u) => {
-            dispatch(comprobarUsuario(u));
+            dispatch(comprobarUsuarioAction(u));
         });
     }
 }

@@ -14,12 +14,12 @@ import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min
 import '../node_modules/sweetalert/dist/sweetalert.css';
 import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
 import configureStore from "./store/configureStore";
-import {esUsuarioLogueado} from "./actions/usuarioActions";
+import {comprobarUsuario} from "./actions/usuarioActions";
 
 injectTapEventPlugin();
 
 const store = configureStore();
-store.dispatch(esUsuarioLogueado());
+store.dispatch(comprobarUsuario());
 
 
 

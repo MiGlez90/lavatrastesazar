@@ -2,7 +2,7 @@ export default function usuarioReducer ( state = {} , action ){
     switch(action.type){
         case "INICIAR_SESION":
             if (action.user) {
-                return action.user;
+                return action.usuario;
             }else{
                 return null;
             }
@@ -15,7 +15,7 @@ export default function usuarioReducer ( state = {} , action ){
             }
 
         case "CERRAR_SESION":
-            return ;
+            return  null;
         default:
             return state;
     }
