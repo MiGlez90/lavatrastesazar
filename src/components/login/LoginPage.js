@@ -4,25 +4,14 @@ import './LoginPage.css';
 import LoginForm from "./LoginForm";
 import firebase from '../../firebase';
 import toastr from 'toastr';
+import * as usuarioActions from '../../actions/usuarioActions';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 
 class LoginPage extends Component {
 	constructor(props){
 		super(props);
-		firebase.auth().onAuthStateChanged( (user) => {
-			if (user) {
-				console.log(user.uid);
-				// var usuario = user.uid;
-				// this.setState({user:usuario});
-				toastr.error('Debe cerrar sesión');
-				this.props.history.push("/diabetes");
-			} else {
-				// No user is signed in.
-				//toastr.error('No ha iniciado sesión');
-				//alert('No ha iniciado sesión');
-
-			}
-		});
 	}
 	/* TODO hacer funcionalidad para redes sociales
 	loginWithFacebook = () => {
@@ -43,39 +32,45 @@ class LoginPage extends Component {
 		alert('ME estoy logeando con Twitter');
 	}
 	*/
+
 	loginWithPassword = (user) =>{
-		if (
-			typeof user !== 'undefined'
-			&& user !== null
-			&& user.email !== ''
-		){
-			firebase.auth()
-				.signInWithEmailAndPassword(user.email, user.password)
-				.then( (result) =>{
-					toastr.success("Bienvenido");
-					console.log('Ya estoy adentro');
-					this.props.history.push('/diabetes');
-				})
-				.catch( (error) => {
-					var errorCode = error.code;
-					let errorMessage = '';
-					if( errorCode === 'auth/user-not-found'){
-						errorMessage = 'Usuario no encontrado';
-					}else if(errorCode === 'auth/wrong-password'){
-						errorMessage = 'La contraseña es inválida';
-					}
-
-					console.log('Algo estuvo mal ' + errorCode);
-					toastr.error( errorMessage);
-			});
-
-		}else{
-			alert('me siento vacio');
-		}
+		this.props.usuarioActions.iniciarSesionThunk(user);
+		// if (
+		// 	typeof user !== 'undefined'
+		// 	&& user !== null
+		// 	&& user.email !== ''
+		// ){
+		// 	firebase.auth()
+		// 		.signInWithEmailAndPassword(user.email, user.password)
+		// 		.then( (result) =>{
+		// 			toastr.success("Bienvenido");
+		// 			console.log('Ya estoy adentro');
+		// 			this.props.history.push('/diabetes');
+		// 		})
+		// 		.catch( (error) => {
+		// 			var errorCode = error.code;
+		// 			let errorMessage = '';
+		// 			if( errorCode === 'auth/user-not-found'){
+		// 				errorMessage = 'Usuario no encontrado';
+		// 			}else if(errorCode === 'auth/wrong-password'){
+		// 				errorMessage = 'La contraseña es inválida';
+		// 			}
+        //
+		// 			console.log('Algo estuvo mal ' + errorCode);
+		// 			toastr.error( errorMessage);
+		// 	});
+        //
+		// }else{
+		// 	alert('me siento vacio');
+		// }
 
 	}
 
 	render() {
+		console.log(this.props.usuario.uid);
+		// for(let i in this.props.usuario){
+		// 	console.log(this.props.usuario[i]);
+		// }
 		return (
 			<div className="App-flex">
 				<LoginForm
@@ -89,4 +84,16 @@ class LoginPage extends Component {
 	}
 }
 
-export default LoginPage;
+function mapStateToProps(state, ownProps) {
+	return {
+		usuario: state.usuario
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		usuarioActions: bindActionCreators(usuarioActions,dispatch)
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (LoginPage);
