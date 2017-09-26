@@ -1,5 +1,7 @@
 import firebase from '../firebase';
 import toastr from 'toastr';
+import {loadListaMedidas} from './medidasActions';
+
 
 export function iniciarSesionAction(usuario) {
     return {type:"INICIAR_SESION" , usuario};
@@ -14,19 +16,17 @@ export function comprobarUsuarioAction(usuario) {
 }
 
 export function iniciarSesion(user) {
-    return function (dispatch, getState) {
-        if (
-            typeof user !== 'undefined'
-            && user !== null
-            && user.email !== ''
-        ) {
-            firebase.auth()
+    return function(dispatch, getState) {
+       // console.log(user)
+        return firebase.auth()
                 .signInWithEmailAndPassword(user.email, user.password)
-                .then((r) => {
+                .then((u) => {
+                //console.log(user)
                     toastr.success("Bienvenido");
                     console.log('Ya estoy adentro');
-                    dispatch(iniciarSesionAction(r.user));
-                    //this.props.history.push('/diabetes');
+                    console.log('USUARIO ID' + u.uid);
+                    dispatch(iniciarSesionAction(u));
+                    dispatch(loadListaMedidas(u.uid))
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -37,19 +37,16 @@ export function iniciarSesion(user) {
                         errorMessage = 'La contraseña es inválida';
                     }
 
-                    console.log('Algo estuvo mal ' + errorCode);
+                    console.log('Algo estuvo mal ',error );
                     toastr.error(errorMessage);
                 });
 
-        } else {
-            alert('me siento vacio');
-        }
     }
 }
 
 export function cerrarSesion() {
     return function (dispatch,getState) {
-        firebase.auth().signOut()
+        return firebase.auth().signOut()
             .then( (r) => {
                 console.log('Ya sali ', r);
                 dispatch(cerrarSesionAction(null));
@@ -62,7 +59,7 @@ export function cerrarSesion() {
 
 export function comprobarUsuario() {
     return function (dispatch, getState) {
-        firebase.auth().onAuthStateChanged((u) => {
+        return firebase.auth().onAuthStateChanged((u) => {
             dispatch(comprobarUsuarioAction(u));
         });
     }

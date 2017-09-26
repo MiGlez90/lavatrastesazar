@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import * as moment from 'moment';
 
 export function loadMedidas(medidas) {
     return { type:"LOAD_MEDIDAS", medidas }
@@ -20,29 +21,27 @@ export function deleteMedida(medida){
 //Aqui se hacen las llamadas asíncronas
 //Se hace una llamada y en su promesa then
 // Se debe de llamar la accion de redux
-export function loadListaMedidas() {
-    return function(dispatch,getState) {
-        firebase.database().ref("medidas")
-            .once("value")
-            .then(r=>{
-                console.log('R' + r.val());
-                let lista = [];
-                const obj = r.val();
-                for(let k in obj){
-                    let item = obj[k];
-                    item['key'] = k;
-                    lista.push(item);
-                }
-                //Ya que se estableció la conexion se ejecuta la acción
-                dispatch(loadMedidas(lista));
-            })
-            .catch(e=>console.log(e));
+export function loadListaMedidas(uid) {
+    return function (dispatch,getState) {
+        return firebase.database().ref( '/medidas/'+ uid + '/' +  moment().format('YYYY') + '/' + moment().format('MM'))
+            .once('value').then(
+                s => {
+                    //moment.locale('es');
+                    let lista = [];
+                    let medidas = s.val();
+                    for(let i in medidas){
+                        let item = medidas[i];
+                        item.key = i;
+                        lista.push(item);
+                    }
+                    dispatch(loadMedidas(lista));
+                });
     }
 }
 
 export function saveCompra(medida){
     return function(dispatch, getState){
-        firebase.database().ref("medidas")
+        return firebase.database().ref("medidas")
             .push(medida)
             .then(r=>{
                 medida['key'] = r.key;
@@ -56,7 +55,7 @@ export function removeCompra(medida){
     return function(dispatch, getState){
         let updates = {};
         updates['/medidas/' + medida.key] = null;
-        firebase.database().ref().update(updates)
+        return firebase.database().ref().update(updates)
             .then(r=>dispatch(deleteMedida(medida)))
             .catch(e=>console.log(e));
 

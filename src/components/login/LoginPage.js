@@ -3,6 +3,7 @@ import '../../App.css';
 import './LoginPage.css';
 import LoginForm from "./LoginForm";
 import * as usuarioActions from '../../actions/usuarioActions';
+import * as medidasActions from '../../actions/medidasActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
@@ -28,14 +29,24 @@ class LoginPage extends Component {
 	}
 	*/
 
+	componentWillReceiveProps(nP){
+        //console.log(this.props.usuario.uid);
+		console.log(nP.medidas);
+	}
+
 	loginWithPassword = (user) =>{
+		console.log(user.email + user.password);
 		this.props.usuarioActions.iniciarSesion(user);
+
 	};
 
 	render() {
 		if(this.props.usuario !== null ){
             console.log(this.props.usuario.uid);
 		}
+		if(this.props.medidas !== undefined && this.props.medidas.length > 0){
+			console.log(this.props.medidas);
+        }
 
 		return (
 			<div className="App-flex">
@@ -52,13 +63,15 @@ class LoginPage extends Component {
 
 function mapStateToProps(state, ownProps) {
 	return {
-		usuario: state.usuario
+		usuario: state.usuario,
+		medidas: state.medidas
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		usuarioActions: bindActionCreators(usuarioActions,dispatch)
+		usuarioActions: bindActionCreators(usuarioActions,dispatch),
+		medidasActions: bindActionCreators(medidasActions,dispatch)
 	}
 }
 
