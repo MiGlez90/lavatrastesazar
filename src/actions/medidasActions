@@ -4,12 +4,12 @@ export function loadMedidas(medidas) {
     return { type:"LOAD_MEDIDAS", medidas }
 }
 
-export function addCompra(medida){
+export function addMedida(medida){
     return {type:"ADD_MEDIDA", medida}
 }
 
 
-export function deleteCompra(medida){
+export function deleteMedida(medida){
     return {type:"DELETE_MEDIDA", medida}
 }
 
@@ -46,7 +46,7 @@ export function saveCompra(medida){
             .push(medida)
             .then(r=>{
                 medida['key'] = r.key;
-                dispatch(addCompra(medida));
+                dispatch(addMedida(medida));
             })
             .catch(e=>console.log(e));
     }
@@ -57,7 +57,7 @@ export function removeCompra(medida){
         let updates = {};
         updates['/medidas/' + medida.key] = null;
         firebase.database().ref().update(updates)
-            .then(r=>dispatch(deleteCompra(medida)))
+            .then(r=>dispatch(deleteMedida(medida)))
             .catch(e=>console.log(e));
 
     }
