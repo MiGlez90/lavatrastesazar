@@ -36,7 +36,11 @@ class LoginPage extends Component {
 
 	loginWithPassword = (user) =>{
 		console.log(user.email + user.password);
-		this.props.usuarioActions.iniciarSesion(user);
+		this.props.usuarioActions.iniciarSesion(user)
+			.then(() => {
+				this.props.history.push('/diabetes');
+			}
+		);
 
 	};
 

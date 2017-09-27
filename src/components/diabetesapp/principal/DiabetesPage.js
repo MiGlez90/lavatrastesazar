@@ -43,10 +43,16 @@ class diabetesPage extends  Component
 			},
 			dateRama: fechaActual
 		};
+	}
 
 
-
-
+	componentWillReceiveProps(nextProps){
+		debugger;
+		if( typeof nextProps.usuario === 'undefined' ||
+				nextProps.usuario === null){
+			toastr.error('Debe iniciar sesión');
+			this.props.history.push('/login');
+		}
 	}
 
 	handleChange = (e) => {

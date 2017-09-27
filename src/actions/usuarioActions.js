@@ -61,9 +61,11 @@ export function cerrarSesion() {
 export function comprobarUsuario(){
     return function (dispatch, getState) {
         return firebase.auth().onAuthStateChanged((u) => {
-            debugger;
-            dispatch(comprobarUsuarioAction(u));
-            dispatch(loadListaMedidas(u.uid));
+            if(u){
+                dispatch(comprobarUsuarioAction(u));
+                dispatch(loadListaMedidas(u.uid));
+            }
+
         });
     }
 }
