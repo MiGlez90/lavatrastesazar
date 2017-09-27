@@ -36,11 +36,6 @@ class diabetesPage extends  Component
 		this.state = {
 			showAddNew: false,
 			isBlocking:false,
-			medida:{
-				medida: 0,
-				descripcion: '',
-				fecha: fechaActual
-			},
 			dateRama: fechaActual
 		};
 	}
@@ -55,17 +50,11 @@ class diabetesPage extends  Component
 		}
 	}
 
-	handleChange = (e) => {
-
-		let medida = this.state.medida;
-		medida[e.target.name] = e.target.value;
-		this.setState({medida,isBlocking:true});
-
-	};
 
 
 
-	handleSubmit = (e) => {
+
+	handleSubmit = (e, medida) => {
 		debugger;
 		e.preventDefault();
 		this.setState({isBlocking:false});
@@ -76,12 +65,20 @@ class diabetesPage extends  Component
 		//cambia el formato de la fecha antes de mandar los datos
         //al servidor
 
-        let medida = this.state.medida;
-        console.log('Fecha ' + medida.fecha);
-        medida['fecha'] = moment(medida.fecha,'YYYY MM DD').format('DD MMMM YYYY');
-        this.setState({medida});
+        // let medida = this.state.medida;
+        // console.log('Fecha ' + medida.fecha);
+        // medida['fecha'] = moment(medida.fecha,'YYYY MM DD').format('DD MMMM YYYY');
+        // this.setState({medida});
 
-		this.guardarMedida(this.state.medida);
+
+
+		//this.guardarMedida(m);
+
+        this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
+            debugger;
+            toastr.success('Guardado');
+            this.toogleShowAdd();
+        });
 
 	};
 
@@ -96,7 +93,7 @@ class diabetesPage extends  Component
 
 
 	toogleShowAdd = () => {
-        if ( this.state.isBlocking ) {
+		if ( this.state.isBlocking ) {
             swal({
                 title: 'Seguro que quieres salir?',
                 text: "Perderas tus datos!!",
@@ -121,10 +118,7 @@ class diabetesPage extends  Component
 	};
 
 	openShowAdd = ( ) => {
-        let medida = this.state.medida;
-        console.log('Fecha al input: ' +  this.state.dateRama);
-        medida['fecha'] = this.state.dateRama;
-	    this.setState({showAddNew: true ,isBlocking: false, medida});
+	    this.setState({showAddNew: true ,isBlocking: false});
     };
 
 
@@ -178,10 +172,9 @@ class diabetesPage extends  Component
                                     onHide: this.toogleShowAdd
                                 }}
                                 onClick={this.toogleShowAdd}
-							    onChange={this.handleChange}
-							    onSubmit={this.handleSubmit}
+							    onSubmit={this.guardarMedida}
                                 isBlocking={this.state.isBlocking}
-                                fechaActual={this.state.medida.fecha}
+								values={this.state.medida}
                             />
 
 						}

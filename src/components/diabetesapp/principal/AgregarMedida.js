@@ -4,76 +4,104 @@ import InputBootstrap from "../../common/InputBootstrap";
 import * as moment from 'moment';
 
 
-const AgregarMedida = (props) => {
-    let fechaActual = props.fechaActual;
-    fechaActual = moment(fechaActual,['DD MMMM YYYY','YYYY MM DD']).format('YYYY[-]MM[-]DD');
-    return (
-        <div style={{marginTop:'45vh'}} className="static-modal">
-            <Modal {... props.modalOptions} >
-                <Modal.Header>
-                    <Modal.Title>Agregar medida</Modal.Title>
-                </Modal.Header>
+class AgregarMedida extends React.Component{
+    constructor(props) {
+        super(props);
+        const hoy = moment().format('YYYY-MM-DD');
+        this.state = {
+            today: hoy,
+            medida: {
+                medida: 0,
+                descripcion: '',
+                fecha: hoy
+            }
+        };
+    }
 
-                <Modal.Body>
-                    <Form
-                                horizontal
-                                onSubmit={props.onSubmit}
-                                id="Formulario1"
-                    >
-                        <InputBootstrap
-                            label="Medida"
-                            input={{
-                                required:"required",
-                                onChange:props.onChange,
-                                name:"medida",
-                                type:"number",
-                                placeholder:"Medida",
-                                min: 0,
-                                max: 700,
-                                maxLength: "3",
-                                style:{paddingRight:0}
-                            }}
+    handleChange = (e) => {
+        let targetName = e.target.name;
+        let medida = this.state.medida;
+        medida[targetName] = e.target.value;
+        this.setState({medida,isBlocking:true});
 
-                        />
+    };
 
-                        <InputBootstrap
-                            label="Descripción"
-                            input={{
-                                required:"required",
-                                onChange:props.onChange,
-                                name:"descripcion",
-                                type:"text",
-                                placeholder:"Descripción",
-                                style:{paddingRight:0}
-                            }}
+    saveCompra = (e) => {
+        e.preventDefault();
+        this.props.onSubmit(this.state.medida);
+    };
 
-                        />
+    render() {
+        debugger;
+        return (
+            <div style={{marginTop: '45vh'}} className="static-modal">
+                <Modal {...this.props.modalOptions} >
+                    <Modal.Header>
+                        <Modal.Title>Agregar medida</Modal.Title>
+                    </Modal.Header>
 
-                        <InputBootstrap
-                            label="Fecha"
-                            input={{
-                                required:"required",
-                                onChange:props.onChange,
-                                name:"fecha",
-                                type:"date",
-                                placeholder:"Fecha",
-                                max: fechaActual,
-                                value: fechaActual,
-                                style:{paddingRight:0}
-                            }}
+                    <Modal.Body>
+                        <Form
+                            horizontal
+                            onSubmit={this.saveCompra}
+                            id="Formulario1">
+                            <InputBootstrap
+                                label="Medida"
+                                input={{
+                                    value: this.state.medida.medida,
+                                    required: "required",
+                                    onChange: this.handleChange,
+                                    name: "medida",
+                                    type: "number",
+                                    placeholder: "Medida",
+                                    min: 0,
+                                    max: 700,
+                                    maxLength: "3",
+                                    style: {paddingRight: 0}
+                                }}
 
-                        />
-                    </Form>
-                </Modal.Body>
+                            />
 
-                <Modal.Footer>
-                    <Button onClick={props.onClick}>Cerrar</Button>
-                    <Button form="Formulario1" type="submit" bsStyle="primary">Guardar Cambios</Button>
-                </Modal.Footer>
+                            <InputBootstrap
+                                label="Descripción"
+                                input={{
+                                    value: this.state.medida.descripcion,
+                                    required: "required",
+                                    onChange: this.handleChange,
+                                    name: "descripcion",
+                                    type: "text",
+                                    placeholder: "Descripción",
+                                    style: {paddingRight: 0}
+                                }}
 
-            </Modal>
-        </div>
-    );
-};
+                            />
+
+                            <InputBootstrap
+                                label="Fecha"
+                                input={{
+                                    required: "required",
+                                    onChange: this.handleChange,
+                                    name: "fecha",
+                                    type: "date",
+                                    placeholder: "Fecha",
+                                    max: this.state.today,
+                                    value: this.state.medida.fecha,
+                                    style: {paddingRight: 0}
+                                }}
+
+                            />
+                        </Form>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button onClick={this.props.onClick}>Cerrar</Button>
+                        <Button form="Formulario1" type="submit" bsStyle="primary">Guardar Cambios</Button>
+                    </Modal.Footer>
+
+                </Modal>
+            </div>
+        );
+    }
+}
 
 export default AgregarMedida;

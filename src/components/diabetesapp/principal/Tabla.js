@@ -26,6 +26,7 @@ class Tabla extends Component {
 			// alwaysShowAllBtns: true // Always show next and previous button
 			// withFirstAndLast: false > Hide the going to First and Last page button
 		};
+		//debugger;
 
 		return (
 			<BootstrapTable data={ this.props.data } pagination={ true } options={ options } >
