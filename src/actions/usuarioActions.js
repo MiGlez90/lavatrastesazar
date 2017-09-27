@@ -27,7 +27,7 @@ export function iniciarSesion(user) {
                     console.log('Ya estoy adentro');
                     console.log('USUARIO ID' + u.uid);
                     dispatch(iniciarSesionAction(u));
-                    dispatch(loadListaMedidas(u.uid))
+                    //dispatch(loadListaMedidas(u.uid,moment().format('YYYY'),moment().format('MM')));
                 })
                 .catch((error) => {
                     var errorCode = error.code;
