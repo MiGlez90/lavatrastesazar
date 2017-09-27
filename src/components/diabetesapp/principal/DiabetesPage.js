@@ -41,15 +41,6 @@ class diabetesPage extends  Component
 	}
 
 
-	componentWillReceiveProps(nextProps){
-		debugger;
-		if( typeof nextProps.usuario === 'undefined' ||
-				nextProps.usuario === null){
-			toastr.error('Debe iniciar sesión');
-			this.props.history.push('/login');
-		}
-	}
-
 
 
 
@@ -121,7 +112,14 @@ class diabetesPage extends  Component
 	    this.setState({showAddNew: true ,isBlocking: false});
     };
 
-
+    componentWillUpdate(nextProps,nextState){
+        alert('Recibi props alerta');
+        if( typeof nextProps.usuario === 'undefined' ||
+            nextProps.usuario === null){
+            toastr.error('Debe iniciar sesión');
+            this.props.history.push('/login');
+        }
+    }
 
 	render() {
 		return (

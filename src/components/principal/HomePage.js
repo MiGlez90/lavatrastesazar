@@ -5,12 +5,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as  usuarioActions from '../../actions/usuarioActions';
 import './HomePage.css';
+import swal from 'sweetalert2';
 
 
 class HomePage extends Component{
 	state = {
 		show: false
 	};
+
 	render(){
 		return(
 			<Grid className="homePage">
