@@ -30,6 +30,7 @@ class AgregarMedida extends React.Component{
         e.preventDefault();
         moment.locale('es');
         let medida = this.state.medida;
+        medida.mes = moment(medida.fecha,'YYYY-MM-DD').format('MM');
         medida.fecha = moment(medida.fecha,'YYYY-MM-DD').format('DD MMM YYYY');
         this.setState({medida}, ()=>{
             this.props.onSubmit(this.state.medida);

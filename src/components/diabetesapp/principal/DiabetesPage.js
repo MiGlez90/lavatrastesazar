@@ -74,7 +74,7 @@ class diabetesPage extends  Component
 	};
 
     guardarMedida = (medida) => {
-        this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
+    	this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
         	debugger;
         	toastr.success('Guardado');
         	this.toogleShowAdd();
@@ -113,7 +113,7 @@ class diabetesPage extends  Component
     };
 
     componentWillUpdate(nextProps,nextState){
-        alert('Recibi props alerta');
+        //alert('Recibi props alerta');
         if( typeof nextProps.usuario === 'undefined' ||
             nextProps.usuario === null){
             toastr.error('Debe iniciar sesión');

@@ -26,7 +26,9 @@ export function vaciarMedidas() {
 // Se debe de llamar la accion de redux
 export function loadListaMedidas(uid) {
     return function (dispatch,getState) {
-        return firebase.database().ref( '/medidas/'+ uid + '/' +  moment().format('YYYY') + '/' + moment().format('MM'))
+        return firebase.database().ref( '/medidas/'+ uid + '/2017' )
+            .orderByChild('mes')
+            .startAt('09')
             .once('value').then(
                 s => {
                     //moment.locale('es');
@@ -44,7 +46,7 @@ export function loadListaMedidas(uid) {
 
 export function saveMedida(medida,uid){
     return function(dispatch, getState){
-        return firebase.database().ref("/medidas/"+ uid + '/2017/09')
+        return firebase.database().ref("/medidas/"+ uid + '/2017')
             .push(medida)
             .then(r=>{
                 debugger;
