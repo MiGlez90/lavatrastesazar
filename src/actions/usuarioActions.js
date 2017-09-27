@@ -1,6 +1,7 @@
 import firebase from '../firebase';
 import toastr from 'toastr';
 import {loadListaMedidas, vaciarMedidas} from './medidasActions';
+import * as moment from 'moment';
 
 
 export function iniciarSesionAction(usuario) {
@@ -64,8 +65,10 @@ export function comprobarUsuario(){
         return firebase.auth().onAuthStateChanged((u) => {
             if(u){
                 debugger;
+                const year = moment().format('YYYY');
+                const month = moment().format('MM');
                 dispatch(comprobarUsuarioAction(u));
-                dispatch(loadListaMedidas(u.uid));
+                dispatch(loadListaMedidas(u.uid,year,month));
             }else{
                 debugger;
             }

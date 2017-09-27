@@ -24,11 +24,11 @@ export function vaciarMedidas() {
 //Aqui se hacen las llamadas asíncronas
 //Se hace una llamada y en su promesa then
 // Se debe de llamar la accion de redux
-export function loadListaMedidas(uid) {
+export function loadListaMedidas(uid,year,month) {
     return function (dispatch,getState) {
-        return firebase.database().ref( '/medidas/'+ uid + '/2017' )
+        return firebase.database().ref( '/medidas/'+ uid + '/' + year )
             .orderByChild('mes')
-            .startAt('09')
+            .equalTo(month)
             .once('value').then(
                 s => {
                     //moment.locale('es');
@@ -44,9 +44,9 @@ export function loadListaMedidas(uid) {
     }
 }
 
-export function saveMedida(medida,uid){
+export function saveMedida(medida,uid,year){
     return function(dispatch, getState){
-        return firebase.database().ref("/medidas/"+ uid + '/2017')
+        return firebase.database().ref("/medidas/"+ uid + '/' + year)
             .push(medida)
             .then(r=>{
                 debugger;
