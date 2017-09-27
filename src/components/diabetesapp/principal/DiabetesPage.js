@@ -80,7 +80,7 @@ class diabetesPage extends  Component
 	};
 
     guardarMedida = (medida) => {
-        this.props.medidasActions.saveCompra(medida,this.props.usuario.uid).then(()=>{
+        this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
         	debugger;
         	toastr.success('Guardado');
         	this.toogleShowAdd();

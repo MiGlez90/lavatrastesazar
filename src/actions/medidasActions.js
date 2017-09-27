@@ -39,7 +39,7 @@ export function loadListaMedidas(uid) {
     }
 }
 
-export function saveCompra(medida,uid){
+export function saveMedida(medida,uid){
     return function(dispatch, getState){
         return firebase.database().ref("/medidas/"+ uid + '/2017/09')
             .push(medida)
@@ -52,7 +52,7 @@ export function saveCompra(medida,uid){
     }
 }
 
-export function removeCompra(medida){
+export function removeMedida(medida){
     return function(dispatch, getState){
         let updates = {};
         updates['/medidas/' + medida.key] = null;
