@@ -14,6 +14,9 @@ export function deleteMedida(medida){
     return {type:"DELETE_MEDIDA", medida}
 }
 
+export function vaciarMedidas() {
+    return {type:"VACIAR_MEDIDAS", medidas:[]};
+}
 //////////////// END ACCIONES ////////////////
 
 

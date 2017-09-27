@@ -1,6 +1,6 @@
 import firebase from '../firebase';
 import toastr from 'toastr';
-import {loadListaMedidas} from './medidasActions';
+import {loadListaMedidas, vaciarMedidas} from './medidasActions';
 
 
 export function iniciarSesionAction(usuario) {
@@ -51,6 +51,7 @@ export function cerrarSesion() {
                 console.log('Ya sali ', r);
                 toastr.success('Ha cerrado sesión');
                 dispatch(cerrarSesionAction(null));
+                dispatch(vaciarMedidas());
             }).catch( (error) => {
                 console.error('No pude salir');
             });
