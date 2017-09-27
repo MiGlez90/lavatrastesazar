@@ -39,11 +39,12 @@ export function loadListaMedidas(uid) {
     }
 }
 
-export function saveCompra(medida){
+export function saveCompra(medida,uid){
     return function(dispatch, getState){
-        return firebase.database().ref("medidas")
+        return firebase.database().ref("/medidas/"+ uid + '/2017/09')
             .push(medida)
             .then(r=>{
+                debugger;
                 medida['key'] = r.key;
                 dispatch(addMedida(medida));
             })

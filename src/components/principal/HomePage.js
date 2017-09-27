@@ -25,11 +25,6 @@ class HomePage extends Component{
 							{/*onConfirm={() => this.setState({ show: false })}*/}
 							{/*type="error"*/}
 						{/*/>*/}
-						<button
-							style={{marginTop:80}}
-							onClick={()=>this.props.usuarioActions.cerrarSesion()}
-						>Cerrar sesion
-						</button>
 					</Col>
 				</Row>
 			</Grid>
