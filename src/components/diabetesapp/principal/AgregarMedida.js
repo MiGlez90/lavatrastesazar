@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal,Button, Form} from 'react-bootstrap';
 import InputBootstrap from "../../common/InputBootstrap";
 import * as moment from 'moment';
-
+import 'moment/locale/es';
 
 class AgregarMedida extends React.Component{
     constructor(props) {
@@ -28,7 +28,13 @@ class AgregarMedida extends React.Component{
 
     saveCompra = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.state.medida);
+        moment.locale('es');
+        let medida = this.state.medida;
+        medida.fecha = moment(medida.fecha,'YYYY-MM-DD').format('DD MMM YYYY');
+        this.setState({medida}, ()=>{
+            this.props.onSubmit(this.state.medida);
+        });
+
     };
 
     render() {
