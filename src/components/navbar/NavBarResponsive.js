@@ -7,8 +7,8 @@ import * as usuarioActions from '../../actions/usuarioActions';
 import './NavBarResponsive.css';
 
 class NavBarResponsive extends Component {
-
 	render(){
+		debugger;
 		const style = {
 			borderRadius: '0px',
 			marginBottom: '0px',
@@ -54,7 +54,7 @@ class NavBarResponsive extends Component {
 						</NavDropdown>*/}
 					</Nav>
 
-                        { typeof this.props.usuario === 'undefined' || this.props.usuario === null ?
+                        { (typeof this.props.usuario === 'undefined' || this.props.usuario === null  ) ?
 							<Nav pullRight>
 								<LinkContainer to="/login">
 									<NavItem eventKey="login" >

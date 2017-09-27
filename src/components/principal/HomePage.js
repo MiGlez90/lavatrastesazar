@@ -15,7 +15,7 @@ class HomePage extends Component{
 		return(
 			<Grid className="homePage">
 				<Row>
-					<h1>Hola</h1>
+					{/*<h1>Hola</h1>*/}
 					<Col xs={12} sm={12} md={12}>
 						{/*<button onClick={() => this.setState({ show: true })}>Alert</button>*/}
 						{/*<SweetAlert*/}

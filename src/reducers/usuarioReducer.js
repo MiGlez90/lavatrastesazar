@@ -1,4 +1,4 @@
-export default function usuarioReducer ( state = {} , action ){
+export default function usuarioReducer ( state = null , action ){
     switch(action.type){
         case "INICIAR_SESION":
             if (action.user) {

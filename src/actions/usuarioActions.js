@@ -62,8 +62,11 @@ export function comprobarUsuario(){
     return function (dispatch, getState) {
         return firebase.auth().onAuthStateChanged((u) => {
             if(u){
+                debugger;
                 dispatch(comprobarUsuarioAction(u));
                 dispatch(loadListaMedidas(u.uid));
+            }else{
+                debugger;
             }
 
         });
