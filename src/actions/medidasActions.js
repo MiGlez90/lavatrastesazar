@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import * as moment from 'moment';
+
 
 export function loadMedidas(medidas) {
     return { type:"LOAD_MEDIDAS", medidas }

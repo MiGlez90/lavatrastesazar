@@ -8,14 +8,15 @@ const Grafica = (props) => {
     let datos = [];
     let etiquetas = [];
     //console.log('This props :' +  props.grafica.data);
-    const longitud = props.medidasLista.length > 7 ? 7 : props.medidasLista.length ;
-        for (let i = 0 ; i < longitud; i++) {
-            datos.push( props.medidasLista[i].medida );
+    if( typeof props.medidasLista !== 'undefined' && props.medidasLista !== null) {
+        const longitud = props.medidasLista.length > 7 ? 7 : props.medidasLista.length;
+        for (let i = 0; i < longitud; i++) {
+            datos.push(props.medidasLista[i].medida);
             let fechaLarga = props.medidasLista[i].fecha;
             let fechaCorta = moment(fechaLarga, 'DD MMMM YYYY').format('DD MMM');
-            etiquetas.push( fechaCorta );
+            etiquetas.push(fechaCorta);
         }
-
+    }
 
     const data = {
             datasets: [
@@ -48,12 +49,15 @@ const Grafica = (props) => {
         position: 'down'
     };
 
+    const max = Math.max(...datos) ;
+    const min = Math.min(...datos) ;
+
     const options = {
         scales: {
             yAxes: [{
                 ticks: {
-                    max: 200,
-                    min: 110
+                    max: max,
+                    min: min
                 }
             }]
         }

@@ -16,6 +16,8 @@ import * as usuariosActions from '../../../actions/usuarioActions';
 import * as medidasActions from '../../../actions/medidasActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import InputBootstrap from "../../common/InputBootstrap";
+import ShowAverage from "./ShowAverage";
 
 const style = {
     margin: 0,
@@ -123,12 +125,27 @@ class diabetesPage extends  Component
 
 	render() {
 		return (
-			<div style={{marginTop:'10vh'}} className="diabetes-page">
+			<div style={{marginTop:'10%'}} className="diabetes-page">
 				<Grid>
 					<Row >
 						<Col xs={12} sm={12} md={6} lg={6} >
-							<h1>Control Diabetes</h1>
-							<h2>Grafica de mis últimas muestras</h2>
+							<h1 style={{fontSize:'210%'}}>Control Diabetes</h1>
+							<h2 style={{fontSize:'110%'}}>Grafica de mis últimas muestras</h2>
+							<div>
+								<InputBootstrap
+									label="Selecciona el mes"
+									input={{
+                                        required: "required",
+                                        name: "mes",
+                                        type: "month",
+                                        style: {paddingRight: 0,margin:'0px 0px 10px 0px'}
+                                    }}
+								/>
+							</div>
+							<ShowAverage medidas={this.props.medidas}/>
+							<div style={{marginLeft:20,textAlign:'left'}}>
+								<Button>Aceptar</Button>
+							</div>
                             <Grafica
 								medidasLista={this.props.medidas}/>
 						</Col>
