@@ -16,8 +16,8 @@ import * as usuariosActions from '../../../actions/usuarioActions';
 import * as medidasActions from '../../../actions/medidasActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import InputBootstrap from "../../common/InputBootstrap";
 import ShowAverage from "./ShowAverage";
+import SelectMonth from "./SelectMonth";
 
 const style = {
     margin: 0,
@@ -35,10 +35,16 @@ class diabetesPage extends  Component
 	constructor(props){
 		super(props);
 		const fechaActual = moment().format('YYYY-MM-DD');
+		const month = moment().format('MM');
+		const year = moment().format('YYYY');
 		this.state = {
 			showAddNew: false,
 			isBlocking:false,
-			dateRama: fechaActual
+			dateRama: fechaActual,
+			monthPicker:{
+				year: year,
+				month: month,
+			}
 		};
 	}
 
@@ -123,6 +129,26 @@ class diabetesPage extends  Component
         }
     }
 
+    handleChange = (e) => {
+    	let valor = e.target.value;
+    	let monthPicker = this.state;
+    	let valores = valor.split('-');
+    	monthPicker.year = valores[0];
+    	monthPicker.month = valores[1];
+
+    	this.setState({monthPicker}, ()=>{
+    		this.loadMedidas();
+		});
+	};
+
+    loadMedidas = () => {
+    	this.props.medidasActions.loadListaMedidas(
+    		this.props.usuario.uid,
+			this.state.monthPicker.year,
+			this.state.monthPicker.month
+		);
+	};
+
 	render() {
 		return (
 			<div style={{marginTop:'10%'}} className="diabetes-page">
@@ -131,21 +157,12 @@ class diabetesPage extends  Component
 						<Col xs={12} sm={12} md={6} lg={6} >
 							<h1 style={{fontSize:'210%'}}>Control Diabetes</h1>
 							<h2 style={{fontSize:'110%'}}>Grafica de mis últimas muestras</h2>
-							<div>
-								<InputBootstrap
-									label="Selecciona el mes"
-									input={{
-                                        required: "required",
-                                        name: "mes",
-                                        type: "month",
-                                        style: {paddingRight: 0,margin:'0px 0px 10px 0px'}
-                                    }}
-								/>
-							</div>
+							<SelectMonth
+								onChange={this.handleChange}
+								year={this.state.monthPicker.year}
+								month={this.state.monthPicker.month}
+							/>
 							<ShowAverage medidas={this.props.medidas}/>
-							<div style={{marginLeft:20,textAlign:'left'}}>
-								<Button>Aceptar</Button>
-							</div>
                             <Grafica
 								medidasLista={this.props.medidas}/>
 						</Col>
@@ -166,6 +183,7 @@ class diabetesPage extends  Component
                             <div className="buttonNormal">
                                 <Button
                                     bsStyle="primary"
+									block
                                     onClick={this.openShowAdd}>
                                     Agregar Medida
                                 </Button>
