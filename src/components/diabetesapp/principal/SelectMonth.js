@@ -19,11 +19,6 @@ const SelectMonth = (props) => {
                     style: {paddingRight: 0,margin:'0px 0px 10px 0px'}
                 }}
             />
-            <Button
-                bsStyle="primary"
-                block>
-                Aceptar
-            </Button>
         </div>
     );
 };
