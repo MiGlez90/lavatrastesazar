@@ -14,6 +14,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 //import {Prompt} from 'react-router-dom';
 import * as usuariosActions from '../../../actions/usuarioActions';
 import * as medidasActions from '../../../actions/medidasActions';
+import * as fechaFiltroActions from '../../../actions/fechaFiltroActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ShowAverage from "./ShowAverage";
@@ -27,6 +28,13 @@ const style = {
     position: 'fixed',
 };
 
+export function toMiliseconds(fechaISO) {
+    return moment(fechaISO , moment.ISO_8601).format('x');
+}
+
+export function toBetterFormat(fechaISO) {
+    return moment(fechaISO , moment.ISO_8601).format('DD MMMM YYYY');
+}
 
 
 class DiabetesPage extends  Component
@@ -123,16 +131,43 @@ class DiabetesPage extends  Component
 		);
 	};
 
+    handleChangeDateInicio = (event, date) => {
+        this.props.fechaFiltroActions.changeFechaInicio(date);
+    };
+
+    handleChangeDateFinal = (event, date) => {
+        this.props.fechaFiltroActions.changeFechaFinal(date);
+    };
+
+    retrieveIngresosWithDate = () => {
+        const {fechaFiltro} = this.props;
+        const fechaFinal = toMiliseconds(fechaFiltro.final);
+        const fechaInicio = toMiliseconds(fechaFiltro.inicio);
+        if(this.checkIfFinalIsGreather(fechaInicio,fechaFinal)){
+            // this.props.actions.loadIngresosDelimitedByRange(fechaInicio, fechaFinal)
+            //     .then( r => {
+            //         // this.props.fechaFiltroActions.changeFechaFinal(fechaFiltro.final);
+            //         // this.props.fechaFiltroActions.changeFechaInicio(fechaFiltro.inicio);
+            //         // this.onToogle();
+            //     });
+        }else{
+            alert('La fecha final debe ser mayor a la de inicio');
+        }
+    };
+
 	render() {
+	    const {fechaFiltro} = this.props;
 		return (
 			<div className="diabetes-page">
 				<Grid>
 					<Row >
 						<Col xs={12} sm={12} md={6} lg={6} >
                             <SelectMonth
-                                onChange={this.handleChange}
-                                year={this.state.monthPicker.year}
-                                month={this.state.monthPicker.month}
+                                filtro={ fechaFiltro }
+                                onChangeInicio={this.handleChangeDateInicio}
+                                onChangeFinal={this.handleChangeDateFinal}
+                                onSubmit={this.retrieveIngresosWithDate}
+                                onClick={this.onToogle}
                             />
 							<ShowAverage medidas={this.props.medidas}/>
 						</Col>
@@ -190,6 +225,7 @@ function mapStateToProps(state,ownProps) {
 	return {
 		usuario: state.usuario,
 		medidas: state.medidas,
+        fechaFiltro: state.fechaFiltro,
         medidasFetched: state.medidas !== undefined && state.medidas !== null
 	}
 }
@@ -197,7 +233,8 @@ function mapStateToProps(state,ownProps) {
 function mapDispatchToProps(dispatch) {
 	return {
 		usuariosActions: bindActionCreators(usuariosActions,dispatch),
-		medidasActions: bindActionCreators(medidasActions,dispatch)
+		medidasActions: bindActionCreators(medidasActions,dispatch),
+        fechaFiltroActions: bindActionCreators(fechaFiltroActions,dispatch)
 	}
 }
 
