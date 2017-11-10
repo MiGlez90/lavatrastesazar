@@ -1,13 +1,22 @@
 .diabetes-page{
-	display: block;
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
-	/*background-image: url('../../../assets/img/diabetes.jpeg');*/
-	/*background-size: cover;*/
+    box-sizing: border-box;
+    padding-top: 60px;
 }
 
 
+.show_average, .select_range, .title, .grafica{
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+}
+
+.grafica {
+
+}
 
 @media screen and (max-width: 767px) {
     .fab {

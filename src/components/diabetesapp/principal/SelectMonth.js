@@ -1,25 +1,22 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
-import InputBootstrap from "../../common/InputBootstrap";
+import {DatePicker, Paper} from "material-ui";
 
 
 const SelectMonth = (props) => {
     const {onChange,year,month} = props;
     const value = year + '-' + month;
     return (
-        <div>
-            <InputBootstrap
-                label="Selecciona el mes"
-                input={{
-                    onChange: onChange,
-                    required: "required",
-                    name: "mes",
-                    value: value,
-                    type: "month",
-                    style: {paddingRight: 0,margin:'0px 0px 10px 0px'}
-                }}
+        <Paper zDepth={3} className='select_range'>
+            <h2>Selecciona el rango de fecha</h2>
+            <DatePicker
+                floatingLabelText="Inicio"
+                autoOk={true}
             />
-        </div>
+            <DatePicker
+                floatingLabelText="Final"
+                autoOk={true}
+            />
+        </Paper>
     );
 };
 

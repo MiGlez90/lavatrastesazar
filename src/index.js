@@ -15,14 +15,30 @@ import '../node_modules/sweetalert/dist/sweetalert.css';
 import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
 import configureStore from "./store/configureStore";
 import {comprobarUsuario} from "./actions/usuarioActions";
+import areIntlLocalesSupported from 'intl-locales-supported';
 
 injectTapEventPlugin();
 
 const store = configureStore();
 store.dispatch(comprobarUsuario());
 
+export const storeInmediatly = store;
 
-
+// configurar DateTimeFormat para que el date picker
+// tenga configuracion mexicana
+export let DateTimeFormat;
+/**
+ * Use the native Intl.DateTimeFormat if available, or a polyfill if not.
+ */
+if (areIntlLocalesSupported(['es', 'es-MX'])) {
+    DateTimeFormat = global.Intl.DateTimeFormat;
+    console.info(DateTimeFormat.toString());
+} else {
+    const IntlPolyfill = require('intl');
+    DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    require('intl/locale-data/jsonp/es');
+    require('intl/locale-data/jsonp/es-MX');
+}
 
 const WithRouter = () => (
 

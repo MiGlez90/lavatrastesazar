@@ -1,6 +1,7 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 import * as moment from 'moment';
+import {Paper} from "material-ui";
 
 
 /* TODO hacer que funcione */
@@ -66,11 +67,11 @@ const Grafica = (props) => {
 
 
     return (
-        <div style={{marginTop: '10vh'}}>
+        <Paper className='grafica' zDepth={3}>
 
             <Line data={data} options={options} height={200} legend={legend} responsive={true}/>
 
-        </div>
+        </Paper>
     );
 
 

@@ -38,7 +38,7 @@ class NavBarResponsive extends Component {
 							</NavItem>
 						</LinkContainer>
 
-						<LinkContainer to="/diabetes">
+						<LinkContainer to="/diabetes" >
 							<NavItem eventKey="diabetes">
 								Control Diabetes
 							</NavItem>

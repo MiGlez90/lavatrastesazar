@@ -18,19 +18,18 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ShowAverage from "./ShowAverage";
 import SelectMonth from "./SelectMonth";
+import {Paper} from 'material-ui';
 
 const style = {
     margin: 0,
-    top: 'auto',
-    right: 'auto',
     bottom: 20,
-    left: 20,
+    right: 20,
     position: 'fixed',
 };
 
 
 
-class diabetesPage extends  Component
+class DiabetesPage extends  Component
 {
 	constructor(props){
 		super(props);
@@ -49,10 +48,6 @@ class diabetesPage extends  Component
 	}
 
 
-
-
-
-
 	handleSubmit = (e, medida) => {
 		debugger;
 		e.preventDefault();
@@ -60,18 +55,6 @@ class diabetesPage extends  Component
 
         //cambia la locación para que las fechas sean en español
         moment.locale('es');
-
-		//cambia el formato de la fecha antes de mandar los datos
-        //al servidor
-
-        // let medida = this.state.medida;
-        // console.log('Fecha ' + medida.fecha);
-        // medida['fecha'] = moment(medida.fecha,'YYYY MM DD').format('DD MMMM YYYY');
-        // this.setState({medida});
-
-
-
-		//this.guardarMedida(m);
 
         this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
             debugger;
@@ -120,15 +103,6 @@ class diabetesPage extends  Component
 	    this.setState({showAddNew: true ,isBlocking: false});
     };
 
-    componentWillUpdate(nextProps,nextState){
-        //alert('Recibi props alerta');
-        if( typeof nextProps.usuario === 'undefined' ||
-            nextProps.usuario === null){
-            toastr.error('Debe iniciar sesión');
-            this.props.history.push('/login');
-        }
-    }
-
     handleChange = (e) => {
     	let valor = e.target.value;
     	let monthPicker = this.state;
@@ -151,43 +125,35 @@ class diabetesPage extends  Component
 
 	render() {
 		return (
-			<div style={{marginTop:'10%'}} className="diabetes-page">
+			<div className="diabetes-page">
 				<Grid>
 					<Row >
 						<Col xs={12} sm={12} md={6} lg={6} >
-							<h1 style={{fontSize:'210%'}}>Control Diabetes</h1>
-							<h2 style={{fontSize:'110%'}}>Grafica de mis últimas muestras</h2>
-							<SelectMonth
-								onChange={this.handleChange}
-								year={this.state.monthPicker.year}
-								month={this.state.monthPicker.month}
-							/>
+                            <SelectMonth
+                                onChange={this.handleChange}
+                                year={this.state.monthPicker.year}
+                                month={this.state.monthPicker.month}
+                            />
 							<ShowAverage medidas={this.props.medidas}/>
-                            <Grafica
-								medidasLista={this.props.medidas}/>
 						</Col>
 						<Col xs={12} sm={12} md={6} lg={6}>
-							<h2>Detalles de las muestras</h2>
-							<div style={{marginBottom:20}}>
-                                <Tabla
-                                    data={this.props.medidas}/>
-                            </div>
+                            <Grafica
+                                medidasLista={this.props.medidas}/>
+                            {/*<h2>Detalles de las muestras</h2>*/}
+                            {/*<div style={{marginBottom:20}}>*/}
+                                {/*<Tabla*/}
+                                    {/*data={this.props.medidas}/>*/}
+                            {/*</div>*/}
 
 
-                            <div className="fab">
-                                <FloatingActionButton  style={style} onClick={this.openShowAdd}>
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                            </div>
 
-                            <div className="buttonNormal">
-                                <Button
-                                    bsStyle="primary"
-									block
-                                    onClick={this.openShowAdd}>
-                                    Agregar Medida
-                                </Button>
-                            </div>
+                            <FloatingActionButton  style={style} onClick={this.openShowAdd}>
+                                <ContentAdd />
+                            </FloatingActionButton>
+
+
+
+
 
 
 
@@ -223,7 +189,8 @@ class diabetesPage extends  Component
 function mapStateToProps(state,ownProps) {
 	return {
 		usuario: state.usuario,
-		medidas: state.medidas
+		medidas: state.medidas,
+        medidasFetched: state.medidas !== undefined && state.medidas !== null
 	}
 }
 
@@ -234,4 +201,5 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (diabetesPage);
+DiabetesPage = connect(mapStateToProps,mapDispatchToProps) (DiabetesPage);
+export default DiabetesPage;
