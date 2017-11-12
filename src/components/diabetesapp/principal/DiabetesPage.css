@@ -18,6 +18,18 @@
 
 }
 
+.promedio-aceptable{
+    color: green;
+}
+
+.promedio-peligro{
+    color: red;
+}
+
+.promedio-limite{
+    color: #ffea0a;
+}
+
 @media screen and (max-width: 767px) {
     .fab {
         display: initial;

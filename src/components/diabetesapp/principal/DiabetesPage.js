@@ -19,7 +19,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ShowAverage from "./ShowAverage";
 import SelectMonth from "./SelectMonth";
-import {Paper} from 'material-ui';
+import {Dialog, Paper} from 'material-ui';
 
 const style = {
     margin: 0,
@@ -51,10 +51,38 @@ class DiabetesPage extends  Component
 			monthPicker:{
 				year: year,
 				month: month,
-			}
+			},
+            today: fechaActual,
+            medida: {
+                medida: 0,
+                descripcion: '',
+                fecha: fechaActual
+            }
 		};
 	}
 
+	////////////////////////////////////////////////////////////////////
+
+    saveCompra = (e) => {
+        e.preventDefault();
+        moment.locale('es');
+        let medida = this.state.medida;
+        medida.mes = moment(medida.fecha,'YYYY-MM-DD').format('MM');
+        medida.year = moment(medida.fecha,'YYYY-MM-DD').format('YYYY');
+        medida.fecha = moment(medida.fecha,'YYYY-MM-DD').format('DD MMM YYYY');
+        this.setState({medida}, ()=>{
+            this.props.onSubmit(this.state.medida);
+        });
+
+    };
+
+    handleMedidaChange = (e) => {
+        let targetName = e.target.name;
+        let medida = this.state.medida;
+        medida[targetName] = e.target.value;
+        this.setState({medida,isBlocking:true});
+
+    };
 
 	handleSubmit = (e, medida) => {
 		debugger;
@@ -80,6 +108,8 @@ class DiabetesPage extends  Component
 		});
 
     };
+
+    ////////////////////////////////////////////////////
 
 
 	toogleShowAdd = () => {
@@ -198,20 +228,19 @@ class DiabetesPage extends  Component
                         {/*Blank on purpouse*/}
 					</Row>
 					<Row>
-						{
-							this.state.showAddNew &&
-						    <AgregarMedida
-                                modalOptions={{
-                                    show: this.state.showAddNew,
-                                    onHide: this.toogleShowAdd
-                                }}
-                                onClick={this.toogleShowAdd}
-							    onSubmit={this.guardarMedida}
-                                isBlocking={this.state.isBlocking}
-								values={this.state.medida}
-                            />
-
-						}
+						<Dialog
+							open={this.state.showAddNew}
+							modal={false}
+							onRequestClose={this.toogleShowAdd}
+						>
+							<AgregarMedida
+                                medida={this.state.medida}
+								onChange={this.handleMedidaChange}
+								onChangeFecha={null}
+								onSubmit={this.saveCompra}
+								today={this.state.today}
+							/>
+						</Dialog>
 					</Row>
 				</Grid>
 
