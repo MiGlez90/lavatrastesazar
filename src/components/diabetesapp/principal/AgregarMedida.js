@@ -11,7 +11,8 @@ const AgregarMedida = ({medida, onChange, onChangeFecha, onSubmit, today}) => {
             <div>
                 <form
                     onSubmit={onSubmit}
-                    id="Formulario1">
+                    id="Formulario1"
+                    className='add-medida-form'>
                     <TextField
                         floatingLabelText='Medida'
                         value={medida.medida}
@@ -34,14 +35,13 @@ const AgregarMedida = ({medida, onChange, onChangeFecha, onSubmit, today}) => {
 
                     <DatePicker
                         floatingLabelText="Fecha"
-                        value={medida.descripcion}
+                        value={medida.fecha}
                         onChange={onChangeFecha}
                         DateTimeFormat={DateTimeFormat}
                         okLabel="OK"
                         cancelLabel="Cancelar"
                         locale="es"
                         maxDate={today}
-                        fullWidth={true}
                         autoOk={true}
                     />
                 </form>

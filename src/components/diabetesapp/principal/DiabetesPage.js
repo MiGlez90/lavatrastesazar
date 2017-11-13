@@ -19,7 +19,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import ShowAverage from "./ShowAverage";
 import SelectMonth from "./SelectMonth";
-import {Dialog, Paper} from 'material-ui';
+import {Dialog, FlatButton, Paper} from 'material-ui';
 
 const style = {
     margin: 0,
@@ -42,6 +42,7 @@ class DiabetesPage extends  Component
 	constructor(props){
 		super(props);
 		const fechaActual = moment().format('YYYY-MM-DD');
+		const hoy = new Date();
 		const month = moment().format('MM');
 		const year = moment().format('YYYY');
 		this.state = {
@@ -52,29 +53,16 @@ class DiabetesPage extends  Component
 				year: year,
 				month: month,
 			},
-            today: fechaActual,
+            today: hoy,
             medida: {
                 medida: 0,
                 descripcion: '',
-                fecha: fechaActual
+                fecha: hoy
             }
 		};
 	}
 
 	////////////////////////////////////////////////////////////////////
-
-    saveCompra = (e) => {
-        e.preventDefault();
-        moment.locale('es');
-        let medida = this.state.medida;
-        medida.mes = moment(medida.fecha,'YYYY-MM-DD').format('MM');
-        medida.year = moment(medida.fecha,'YYYY-MM-DD').format('YYYY');
-        medida.fecha = moment(medida.fecha,'YYYY-MM-DD').format('DD MMM YYYY');
-        this.setState({medida}, ()=>{
-            this.props.onSubmit(this.state.medida);
-        });
-
-    };
 
     handleMedidaChange = (e) => {
         let targetName = e.target.name;
@@ -84,15 +72,24 @@ class DiabetesPage extends  Component
 
     };
 
-	handleSubmit = (e, medida) => {
-		debugger;
+    onChangeFecha = (e, date) => {
+    	debugger;
+    	let {medida} = this.state;
+    	medida.fecha = date;
+    	this.setState({medida});
+	};
+
+	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({isBlocking:false});
 
         //cambia la locación para que las fechas sean en español
         moment.locale('es');
+        let {medida} = this.state;
+        let toSend = Object.assign({},medida);
+        toSend.fecha = medida.fecha.getTime();
 
-        this.props.medidasActions.saveMedida(medida,this.props.usuario.uid).then(()=>{
+        this.props.medidasActions.saveMedida(toSend,this.props.usuario.uid).then(()=>{
             debugger;
             toastr.success('Guardado');
             this.toogleShowAdd();
@@ -100,14 +97,6 @@ class DiabetesPage extends  Component
 
 	};
 
-    guardarMedida = (medida) => {
-    	this.props.medidasActions.saveMedida(medida,this.props.usuario.uid,medida.year).then(()=>{
-        	debugger;
-        	toastr.success('Guardado');
-        	this.toogleShowAdd();
-		});
-
-    };
 
     ////////////////////////////////////////////////////
 
@@ -187,6 +176,19 @@ class DiabetesPage extends  Component
 
 	render() {
 	    const {fechaFiltro} = this.props;
+	    const actionsAddMedida = [
+			<FlatButton
+				label="Cancelar"
+				primary={true}
+				onClick={this.toogleShowAdd}
+			/>,
+			<FlatButton
+				label="Guardar"
+				primary={true}
+				keyboardFocused={true}
+				onClick={this.handleSubmit}
+			/>
+		];
 		return (
 			<div className="diabetes-page">
 				<Grid>
@@ -204,24 +206,9 @@ class DiabetesPage extends  Component
 						<Col xs={12} sm={12} md={6} lg={6}>
                             <Grafica
                                 medidasLista={this.props.medidas}/>
-                            {/*<h2>Detalles de las muestras</h2>*/}
-                            {/*<div style={{marginBottom:20}}>*/}
-                                {/*<Tabla*/}
-                                    {/*data={this.props.medidas}/>*/}
-                            {/*</div>*/}
-
-
-
                             <FloatingActionButton  style={style} onClick={this.openShowAdd}>
                                 <ContentAdd />
                             </FloatingActionButton>
-
-
-
-
-
-
-
 						</Col>
 					</Row>
 					<Row>
@@ -232,12 +219,13 @@ class DiabetesPage extends  Component
 							open={this.state.showAddNew}
 							modal={false}
 							onRequestClose={this.toogleShowAdd}
+							actions={actionsAddMedida}
 						>
 							<AgregarMedida
                                 medida={this.state.medida}
 								onChange={this.handleMedidaChange}
-								onChangeFecha={null}
-								onSubmit={this.saveCompra}
+								onChangeFecha={this.onChangeFecha}
+								onSubmit={this.handleSubmit}
 								today={this.state.today}
 							/>
 						</Dialog>

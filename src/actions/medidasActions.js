@@ -44,12 +44,11 @@ export function loadListaMedidas(uid,year,month) {
     }
 }
 
-export function saveMedida(medida,uid,year){
+export function saveMedida(medida){
     return function(dispatch, getState){
-        return firebase.database().ref("/medidas/"+ uid + '/' + year)
+        return firebase.database().ref("/medidas/"+ getState().usuario.uid + '/' )
             .push(medida)
             .then(r=>{
-                debugger;
                 medida['key'] = r.key;
                 dispatch(addMedida(medida));
             })
